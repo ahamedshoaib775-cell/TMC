@@ -1,0 +1,247 @@
+/* ============================= */
+/* CONTACT PAGE */
+/* ============================= */
+
+.contact-page {
+  max-width: 1100px;
+  margin: 80px auto;
+  padding: 20px;
+}
+
+.contact-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.contact-header h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 46px;
+  margin-bottom: 10px;
+}
+
+.contact-header p {
+  color: #666;
+  font-size: 16px;
+}
+
+/* Layout */
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 50px;
+}
+
+/* Info box */
+.contact-info {
+  background: #fafafa;
+  padding: 40px;
+  border-radius: 18px;
+}
+
+.contact-info h3 {
+  margin-bottom: 20px;
+}
+
+.contact-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 18px;
+  font-size: 15px;
+}
+
+.contact-item span {
+  margin-left: 12px;
+  color: #444;
+}
+
+.contact-item svg {
+  color: #533cff;
+}
+
+/* Social */
+.contact-social {
+  margin-top: 30px;
+}
+
+.contact-social a {
+  margin-right: 12px;
+  color: #000;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+/* Form */
+.contact-form {
+  background: #fff;
+  padding: 40px;
+  border-radius: 18px;
+  box-shadow: 0 18px 50px rgba(0,0,0,0.08);
+}
+
+.contact-form h3 {
+  margin-bottom: 20px;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  padding: 14px;
+  margin-bottom: 18px;
+  border-radius: 10px;
+  border: 1px solid #ddd;
+  font-family: "Inter", sans-serif;
+}
+
+.contact-form textarea {
+  resize: none;
+  height: 140px;
+}
+
+.contact-form button {
+  width: 100%;
+  padding: 14px;
+  border: none;
+  background: #533cff;
+  color: #fff;
+  font-size: 15px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.contact-form button:hover {
+  background: #3f2edc;
+}
+
+/* Map */
+.contact-map {
+  margin-top: 60px;
+  border-radius: 18px;
+  overflow: hidden;
+}
+
+/* Mobile */
+@media(max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-header h1 {
+    font-size: 36px;
+  }
+
+  .contact-info,
+  .contact-form {
+    padding: 30px;
+  }
+}
+.tmc-footer {
+  background: #000;
+  color: #fff;
+  padding: 70px 20px 30px;
+  font-family: "Inter", sans-serif;
+}
+
+.footer-top {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.footer-logo {
+  font-family: "Playfair Display", serif;
+  font-size: 42px;
+  letter-spacing: 4px;
+  color: #d4af37;
+  margin: 0;
+}
+
+.footer-tagline {
+  font-size: 13px;
+  letter-spacing: 2px;
+  color: #aaa;
+  margin-top: 6px;
+}
+
+.footer-grid {
+  max-width: 1100px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 40px;
+}
+
+.footer-grid h4 {
+  margin-bottom: 15px;
+  font-size: 15px;
+  letter-spacing: 1px;
+  color: #d4af37;
+}
+
+.footer-grid a {
+  display: block;
+  color: #ddd;
+  font-size: 14px;
+  margin-bottom: 8px;
+  text-decoration: none;
+}
+
+.footer-grid a:hover {
+  color: #fff;
+}
+
+.footer-note {
+  font-size: 13px;
+  color: #aaa;
+  margin-top: 6px;
+}
+
+.footer-bottom {
+  text-align: center;
+  margin-top: 50px;
+  font-size: 12px;
+  color: #777;
+}
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  cursor: pointer;
+}
+
+/* Circular logo container */
+.logo-circle {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: radial-gradient(circle at top, #f5d77a, #cfa76f);
+  padding: 3px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Logo image */
+.logo-circle img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: 50%;
+  background: #000;
+}
+
+/* Brand text */
+.logo span {
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+.logo:hover .logo-circle {
+  box-shadow: 0 0 18px rgba(207,167,111,0.6);
+}
+.logo-circle img {
+  transition: transform 0.4s ease;
+}
+.logo:hover img {
+  transform: scale(1.05);
+}
