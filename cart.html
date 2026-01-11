@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMC – Shopping Cart</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Cart Page CSS */
+        .cart-container {
+            padding: 50px 0;
+        }
+        .cart-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 30px;
+        }
+        .cart-table th, .cart-table td {
+            padding: 12px 15px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+        .cart-table th {
+            background-color: #f5f5f5;
+            font-weight: 600;
+        }
+        .cart-product {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .cart-product img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+        .cart-actions button {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            background-color: #533cff;
+            color: #fff;
+            margin: 0 2px;
+        }
+        .cart-actions button:hover {
+            background-color: #3f2dcf;
+        }
+        .cart-total {
+            text-align: right;
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .checkout-btn {
+            display: inline-block;
+            padding: 12px 25px;
+            background-color: #ff6b6b;
+            color: #fff;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        .checkout-btn:hover {
+            background-color: #e05555;
+        }
+        .cart-empty {
+            text-align: center;
+            font-size: 18px;
+            margin-top: 50px;
+        }
+        .clear-cart-btn {
+  background: #c0392b;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 14px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+
+.clear-cart-btn:hover {
+  background: #e74c3c;
+}
+
+        
+    </style>
+    <button id="clearCart" class="clear-cart-btn">
+  Clear Cart
+</button>
+
+</head>
+<body>
+    <!-- Header -->
+    <header class="header" id="header">
+        <!-- Copy header from index.html -->
+    </header>
+
+    <main>
+        <section class="cart-container">
+            <div class="container">
+                <h1 class="section-title">Your Cart</h1>
+                <p class="section-subtitle">Review your selected items before checkout.</p>
+
+                <table class="cart-table" id="cartTable">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Qty</th>
+                            <th>Total</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Cart items loaded via JS -->
+                    </tbody>
+                </table>
+
+                <p class="cart-empty" id="cartEmpty" style="display:none;">Your cart is empty.</p>
+
+                <div class="cart-total" id="cartTotal"></div>
+                <a href="checkout.html" class="checkout-btn">Proceed to Checkout</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Copy footer from index.html -->
+    </footer>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/918939075553?text=Hi! I'm interested in your products." class="whatsapp-float" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <!-- SVG icon -->
+    </a>
+
+    <!-- JS -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        const cartTableBody = document.querySelector('#cartTable tbody');
+        const cartEmpty = document.getElementById('cartEmpty');
+        const cartTotalEl = document.getElementById('cartTotal');
+
+        const cartItems = JSON.parse(localStorage.getItem('cart')) || [];
+        if(cartItems.length === 0){
+            cartEmpty.style.display = 'block';
+            document.querySelector('.checkout-btn').style.display = 'none';
+        } else {
+            let total = 0;
+            cartItems.forEach(item => {
+                const itemTotal = item.price * item.qty;
+                total += itemTotal;
+
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>
+                        <div class="cart-product">
+                            <img src="${item.image}" alt="${item.name}">
+                            <span>${item.name}</span>
+                        </div>
+                    </td>
+                    <td>₹${item.price}</td>
+                    <td class="cart-actions">
+                        <button onclick="updateQty('${item.id}', -1)">-</button>
+                        <span>${item.qty}</span>
+                        <button onclick="updateQty('${item.id}', 1)">+</button>
+                    </td>
+                    <td>₹${itemTotal}</td>
+                    <td><button onclick="removeItem('${item.id}')">Remove</button></td>
+                `;
+                cartTableBody.appendChild(row);
+            });
+            cartTotalEl.innerHTML = `Cart Total: ₹${total}`;
+        }
+
+        function updateQty(id, change){
+            const updated = cartItems.map(i => {
+                if(i.id === id){
+                    i.qty += change;
+                    if(i.qty < 1) i.qty = 1;
+                }
+                return i;
+            });
+            localStorage.setItem('cart', JSON.stringify(updated));
+            location.reload();
+        }
+
+        function removeItem(id){
+            const filtered = cartItems.filter(i => i.id !== id);
+            localStorage.setItem('cart', JSON.stringify(filtered));
+            location.reload();
+        }
+    
+document.getElementById("clearCart").addEventListener("click", () => {
+  if (confirm("Are you sure you want to clear the cart?")) {
+    localStorage.removeItem("cart");
+    location.reload(); // refresh cart UI
+  }
+});
+
+
+    </script>
+</body>
+</html>

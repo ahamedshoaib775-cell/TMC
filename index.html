@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+    <link rel="stylesheet" href="style.css">
+    
+<button class="whatsapp-book" id="waBtn">
+  💬 Book Now
+</button>
+
+
+
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="TMC – The Modest Company | Premium imported hijabs, abayas & Pakistani suits. Luxury modest wear for the modern woman.">
+    <meta name="keywords" content="modest wear, hijab, abaya, Pakistani suits, luxury fashion, imported hijab">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="TMC – The Modest Company | Luxury Modest Wear">
+    <meta property="og:description" content="Discover OG imported hijabs, abayas & Pakistani suits crafted for the modern modest woman.">
+    <meta property="og:image" content="https://themodestcompany.com/og-image.jpg">
+    <meta property="og:url" content="https://themodestcompany.com">
+    <meta property="og:type" content="website">
+    
+    <title>TMC – The Modest Company | Luxury Modest Wear</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Announcement Bar -->
+    <div class="announcement-bar">
+        <p></p>
+    </div>
+<header class="header">
+  <div class="nav-container">
+    <div class="logo">TMC</div>
+
+    <!-- HAMBURGER -->
+    <div class="hamburger" onclick="toggleMenu()">
+      ☰
+    </div>
+
+    <!-- NAV MENU -->
+    <nav class="nav-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="about.html">About</a>
+      <a href="contact.html">Contact</a>
+    </nav>
+  </div>
+</header>
+
+
+<ul class="nav-menu" id="navMenu">
+  ...
+  
+</ul>
+
+
+
+
+    <!-- Navigation -->
+    <header class="header" id="header">
+        <div class="container">
+            <nav class="nav">
+                
+  
+
+                
+                <a href="index.html" class="logo">
+                   <div class="logo" id="logo" aria-label="The Modest Company logo">
+      <div class="logo-circle">
+        <img src="logo.jpeg" alt="The Modest Company Logo">
+      </div>
+      
+    </div>
+                </a>
+                
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li class="nav-dropdown">
+                        <a href="shop.html" class="nav-link">Shop</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="category-hijab.html">Hijabs</a></li>
+                            <li><a href="category-abayas.html">Abayas</a></li>
+                            <li><a href="category-pakistani-suits.html">Pakistani Suits</a></li>
+                            <li><a href="shop.html?filter=new">New Arrivals</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="happy-clients.html" class="nav-link">Happy Clients</a></li>
+                    <li><a href="collabs.html" class="nav-link">Collabs</a></li>
+                    <li><a href="pop-up-events.html" class="nav-link">Pop-ups</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                
+                <div class="nav-actions">
+                    <button class="nav-icon" aria-label="Search" id="searchBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.3-4.3"></path>
+                        </svg>
+                    </button>
+                    <a href="wishlist.html" class="nav-icon" aria-label="Wishlist">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        <span class="badge" id="wishlistCount">0</span>
+                    </a>
+                    <a href="cart.html" class="nav-icon" aria-label="Cart">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span class="badge" id="cartCount">0</span>
+                    </a>
+                    <a href="account.html" class="nav-icon" aria-label="Account">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                            <circle cx="12" cy="7" r="4"></circle>
+                        </svg>
+                    </a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Search Modal -->
+    <div class="search-modal" id="searchModal">
+        <div class="search-modal-content">
+            <button class="close-search" id="closeSearch" aria-label="Close search">×</button>
+            <form class="search-form" action="shop.html" method="GET">
+                <input type="search" name="q" placeholder="Search hijabs, abayas, suits..." class="search-input" id="searchInput">
+                <button type="submit" class="search-submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-bg">
+                <div class="hero-overlay"></div>
+            </div>
+            <div class="container">
+                <div class="hero-content">
+                    <span class="hero-tag">Premium Modest Wear</span>
+                    <h1 class="hero-title">Elegance Redefined.<br>Modesty Elevated.</h1>
+                    <p class="hero-subtitle">Discover OG imported hijabs, abayas & Pakistani suits crafted for the modern modest woman.</p>
+                    <div class="hero-cta">
+                        <a href="shop.html" class="btn btn-primary">Shop Collection</a>
+                        <a href="shop.html?filter=new" class="btn btn-secondary">Explore New Arrivals</a>
+                    </div>
+                </div>
+                <div class="hero-logo">
+                    <img src="logo.jpeg" alt="logo">
+                </div>
+            </div>
+            <div class="hero-scroll">
+                <span>Scroll to explore</span>
+                <div class="scroll-line"></div>
+            </div>
+        </section>
+
+        <!-- Trust Bar -->
+        <section class="trust-bar">
+            <div class="container">
+                <div class="trust-items">
+                    <div class="trust-item">
+                        <span class="trust-icon">✨</span>
+                        <span class="trust-text">Premium Quality Imports</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">🚚</span>
+                        <span class="trust-text">Pan-India Delivery</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">💬</span>
+                        <span class="trust-text">Styling Assistance</span>
+                    </div>
+                    <div class="trust-item">
+                        <span class="trust-icon">❤️</span>
+                        <span class="trust-text">5000+ Happy Clients</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Category Tiles -->
+        <section class="categories section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Shop by Category</h2>
+                    <p class="section-subtitle">Curated collections for every occasion</p>
+                </div>
+                <div class="category-grid">
+                    <a href="category-hijab.html" class="category-card">
+                        <div class="category-image">
+                            <div class="placeholder-image" data-text="Hijabs"></div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Luxe Hijabs</h3>
+                            <p>Effortless Elegance</p>
+                            <span class="category-link">Explore →</span>
+                        </div>
+                    </a>
+                    <a href="category-abayas.html" class="category-card">
+                        <div class="category-image">
+                            <div class="placeholder-image" data-text="Abayas"></div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Statement Abayas</h3>
+                            <p>Command Every Room</p>
+                            <span class="category-link">Explore →</span>
+                        </div>
+                    </a>
+                    <a href="category-pakistani-suits.html" class="category-card category-card-large">
+                        <div class="category-image">
+                            <div class="placeholder-image" data-text="Pakistani Suits"></div>
+                        </div>
+                        <div class="category-content">
+                            <h3>Pakistani Suits</h3>
+                            <p>Timeless Craftsmanship</p>
+                            <span class="category-link">Explore →</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals -->
+        <section class="new-arrivals section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">New Arrivals</h2>
+                    <p class="section-subtitle">Fresh from our latest import</p>
+                    <a href="shop.html?filter=new" class="section-link">View All →</a>
+                </div>
+                <div class="product-carousel" id="newArrivalsCarousel">
+                    <button class="carousel-btn carousel-prev" aria-label="Previous">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"></path>
+                        </svg>
+                    </button>
+                    <div class="carousel-track" id="newArrivalsTrack">
+                        <!-- Products loaded via JS -->
+                    </div>
+                    <button class="carousel-btn carousel-next" aria-label="Next">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 18l6-6-6-6"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Best Sellers -->
+        <section class="best-sellers section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Best Sellers</h2>
+                    <p class="section-subtitle">Client favorites you'll adore</p>
+                </div>
+                <div class="product-grid" id="bestSellersGrid">
+                    <!-- Products loaded via JS -->
+                </div>
+            </div>
+        </section>
+
+        <!-- Story Block -->
+        <section class="story section">
+            <div class="container">
+                <div class="story-grid">
+                    <div class="story-image">
+                        <div class="placeholder-image" data-text="TMC Story"></div>
+                    </div>
+                    <div class="story-content">
+                        <span class="story-tag">Our Promise</span>
+                        <h2 class="story-title">The TMC Promise</h2>
+                        <p class="story-text">At The Modest Company, we believe modesty is not a compromise—it's a choice of sophistication. Every piece in our collection is handpicked from original importers, ensuring authenticity, premium fabric, and designs that honor your elegance.</p>
+                        <p class="story-text">Founded with a vision to bring world-class modest fashion to India, TMC curates pieces that speak to your individuality while respecting your values.</p>
+                        <a href="about.html" class="btn btn-secondary">Read Our Story</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="testimonials section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Happy Clients</h2>
+                    <p class="section-subtitle">Words from our TMC family</p>
+                </div>
+                <div class="testimonial-slider" id="testimonialSlider">
+                    <div class="testimonial-track">
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">"The quality of the hijabs is unmatched! I've ordered multiple times and each piece feels luxurious. TMC truly understands modest fashion."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">S</div>
+                                <div class="author-info">
+                                    <span class="author-name">Sana A.</span>
+                                    <span class="author-location">Mumbai</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">"My wedding abaya from TMC was everything I dreamed of. The attention to detail and customer service is exceptional."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">F</div>
+                                <div class="author-info">
+                                    <span class="author-name">Fatima K.</span>
+                                    <span class="author-location">Delhi</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">"Finally found authentic Pakistani suits in India! The fabric quality and stitching are top-notch. Highly recommend TMC."</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">A</div>
+                                <div class="author-info">
+                                    <span class="author-name">Ayesha R.</span>
+                                    <span class="author-location">Hyderabad</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="testimonial-card">
+                            <div class="testimonial-stars">★★★★★</div>
+                            <p class="testimonial-text">"The WhatsApp styling help made my shopping experience so personal. They helped me pick the perfect outfit for my engagement!"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">M</div>
+                                <div class="author-info">
+                                    <span class="author-name">Mariam S.</span>
+                                    <span class="author-location">Chennai</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-nav">
+                    <button class="testimonial-btn" data-dir="prev" aria-label="Previous testimonial">←</button>
+                    <div class="testimonial-dots" id="testimonialDots"></div>
+                    <button class="testimonial-btn" data-dir="next" aria-label="Next testimonial">→</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Collabs Strip -->
+        <section class="collabs-strip section">
+            <div class="container">
+                <div class="section-header">
+                    <h2 class="section-title">Collaborations</h2>
+                    <p class="section-subtitle">Proud partners in modest fashion</p>
+                </div>
+                <div class="collab-logos">
+                    <div class="collab-logo">
+                        <div class="placeholder-logo">Brand 1</div>
+                    </div>
+                    <div class="collab-logo">
+                        <div class="placeholder-logo">Brand 2</div>
+                    </div>
+                    <div class="collab-logo">
+                        <div class="placeholder-logo">Brand 3</div>
+                    </div>
+                    <div class="collab-logo">
+                        <div class="placeholder-logo">Brand 4</div>
+                    </div>
+                    <div class="collab-logo">
+                        <div class="placeholder-logo">Brand 5</div>
+                    </div>
+                </div>
+                <div class="collab-cta">
+                    <a href="collabs.html" class="btn btn-secondary">Collaborate With Us</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pop-up Teaser -->
+        <section class="popup-teaser section">
+            <div class="container">
+                <div class="popup-card">
+                    <div class="popup-content">
+                        <span class="popup-tag">Upcoming Event</span>
+                        <h2 class="popup-title">TMC Pop-up Store</h2>
+                        <p class="popup-text">Experience our collection in person. Touch the fabrics, try the fits, and get styled by our experts.</p>
+                        <div class="popup-details">
+                            <div class="popup-detail">
+                                <span class="detail-label">Date</span>
+                                <span class="detail-value">January 25-26, 2026</span>
+                            </div>
+                            <div class="popup-detail">
+                                <span class="detail-label">Location</span>
+                                <span class="detail-value">Chennai</span>
+                            </div>
+                        </div>
+                        <a href="pop-up-events.html" class="btn btn-primary">View All Events</a>
+                    </div>
+                    <div class="popup-image">
+                        <div class="placeholder-image" data-text="Pop-up Event"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter section">
+            <div class="container">
+                <div class="newsletter-card">
+                    <h2 class="newsletter-title">Join the TMC Circle</h2>
+                    <p class="newsletter-text">Be the first to know about new arrivals, exclusive offers, and styling tips.</p>
+                    <form class="newsletter-form" id="newsletterForm">
+                        <input type="email" placeholder="Enter your email" required class="newsletter-input">
+                        <button type="submit" class="btn btn-primary">Subscribe</button>
+                    </form>
+                    <p class="newsletter-privacy">We respect your privacy. Unsubscribe anytime.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+   <footer class="tmc-footer">
+  <div class="footer-top">
+    <h2 class="footer-logo">TMC</h2>
+    <p class="footer-tagline">The Modest Company</p>
+  </div>
+
+  <div class="footer-grid">
+    <div>
+      <h4>Shop</h4>
+      <a href="shop.html">All Products</a>
+      <a href="category-hijab.html">Hijabs</a>
+      <a href="category-abayas.html">Abayas</a>
+      <a href="category-pakistani-suits.html">Pakistani Suits</a>
+      <a href="shop.html">New Arrivals</a>
+    </div>
+
+    <div>
+      <h4>Company</h4>
+      <a href="about.html">About Us</a>
+      <a href="happy-clients.html">Happy Clients</a>
+      <a href="collabs.html">Collaborations</a>
+      <a href="pop-up-events.html">Pop-up Events</a>
+      <a href="contact.html">Contact</a>
+    </div>
+
+    <div>
+      <h4>Help</h4>
+      <a href="shipping-policy.html">Shipping Policy</a>
+      <a href="returns-policy.html">Returns & Exchange</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms.html">Terms & Conditions</a>
+      <a href="track.html">Track Order</a>
+    </div>
+
+    <div>
+      <h4>Get in Touch</h4>
+      <a href="https://wa.me/918939075553">Chat on WhatsApp</a>
+      <p class="footer-note">Available 11am – 8pm</p>
+      <p class="footer-note">+91 89390 75553</p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2026 TMC – The Modest Company. All rights reserved.  
+    <br>
+    Founded by @fictionally_flawless_farwah
+  </div>
+</footer>
+
+
+  
+
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

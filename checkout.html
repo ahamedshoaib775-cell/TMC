@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>TMC – Checkout</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/styles.css">
+
+  <style>
+    .checkout-wrapper{max-width:1100px;margin:auto;padding:70px 20px}
+    .checkout-grid{display:grid;grid-template-columns:1.2fr 0.8fr;gap:40px}
+    .box{background:#fff;padding:30px;border-radius:14px;box-shadow:0 15px 40px rgba(0,0,0,.08)}
+    h2{margin-bottom:20px}
+    input,select{width:100%;padding:12px;margin-bottom:15px;border-radius:8px;border:1px solid #ddd}
+    .order-summary div{display:flex;justify-content:space-between;margin-bottom:10px}
+    .pay-btn{background:#533cff;color:#fff;border:none;padding:14px;width:100%;border-radius:10px;font-weight:600;cursor:pointer}
+    @media(max-width:768px){.checkout-grid{grid-template-columns:1fr}}
+  </style>
+</head>
+
+<body>
+
+<header class="header"></header>
+
+<main class="checkout-wrapper">
+  <div class="checkout-grid">
+
+    <!-- ADDRESS -->
+    <div class="box">
+      <h2>Shipping Details</h2>
+      <input placeholder="Full Name" required>
+      <input placeholder="Phone Number" required>
+      <input placeholder="Email">
+      <input placeholder="Address">
+      <input placeholder="City">
+      <input placeholder="State">
+      <input placeholder="Pincode">
+      <select>
+        <option>Cash on Delivery</option>
+        <option>Online Payment (Coming Soon)</option>
+      </select>
+    </div>
+
+    <!-- SUMMARY -->
+    <div class="box">
+      <h2>Order Summary</h2>
+      <div id="summary"></div>
+      <hr>
+      <div class="order-summary">
+        <div><strong>Total</strong><strong id="total">₹0</strong></div>
+      </div>
+      <button class="pay-btn" onclick="placeOrder()">Place Order</button>
+    </div>
+
+  </div>
+</main>
+
+<footer class="footer"></footer>
+
+<script>
+  const cart = JSON.parse(localStorage.getItem("tmcCart")) || [];
+  const summary = document.getElementById("summary");
+  let total = 0;
+
+  cart.forEach(p=>{
+    total += p.price;
+    summary.innerHTML += `<div><span>${p.name}</span><span>₹${p.price}</span></div>`;
+  });
+
+  document.getElementById("total").innerText = "₹" + total;
+
+ 
+function placeOrder(){
+  const cart = JSON.parse(localStorage.getItem("tmcCart")) || [];
+  if(!cart.length) return alert("Cart empty");
+
+  const orders = JSON.parse(localStorage.getItem("tmcOrders")) || [];
+  const total = cart.reduce((s,i)=>s+i.price,0);
+
+  const order = {
+    id: Date.now(),
+    items: cart,
+    total: total
+  };
+
+  orders.push(order);
+  localStorage.setItem("tmcOrders", JSON.stringify(orders));
+  localStorage.removeItem("tmcCart");
+
+  const msg = encodeURIComponent(
+    `New Order from TMC\nOrder ID: ${order.id}\nTotal: ₹${total}`
+  );
+
+  window.location.href = `https://wa.me/918939075553?text=${msg}`;
+}
+
+  
+</script>
+
+</body>
+</html>

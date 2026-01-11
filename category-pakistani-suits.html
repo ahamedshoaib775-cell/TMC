@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMC – Pakistani Suits</title>
+
+    <meta name="description" content="Shop premium imported Pakistani suits at TMC – The Modest Company.">
+    <meta name="keywords" content="Pakistani suits, modest wear, luxury suits, TMC">
+
+    <link rel="stylesheet" href="css/category-pakistani-suits.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+
+</head>
+
+
+
+
+
+    <!-- HEADER -->
+    <header class="header">
+        <!-- Paste header from index.html -->
+    </header>
+
+    <!-- SEARCH MODAL -->
+    <div class="search-modal" id="searchModal">
+        <!-- Paste search modal from index.html -->
+    </div>
+
+    <main>
+
+        <!-- HERO -->
+        <section class="category-hero">
+            <h1>Pakistani Suits</h1>
+            <p>Authentic imported Pakistani suits crafted with premium fabrics and timeless elegance.</p>
+        </section>
+
+
+                <div class="products-grid" id="pakistaniSuitsGrid">
+                    <!-- Products loaded via JS -->
+                </div>
+
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <!-- Paste footer from index.html -->
+    </footer>
+
+    <!-- WHATSAPP FLOAT -->
+    <a href="https://wa.me/918939075553" class="whatsapp-float" target="_blank">
+        <!-- SVG -->
+    </a>
+
+    <!-- JS -->
+    <script src="js/products.js"></script>
+    <script src="js/cart.js"></script>
+    <script src="js/components.js"></script>
+    <script src="js/main.js"></script>
+
+    <script>
+        const grid = document.getElementById("pakistaniSuitsGrid");
+
+        const products = (window.products || []).filter(
+            p => p.category === "pakistani-suits"
+        );
+
+        if (products.length === 0) {
+            grid.innerHTML = "<p>No products available.</p>";
+        }
+
+        products.forEach(p => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+
+            card.innerHTML = `
+                <img src="${p.image}" alt="${p.name}">
+                <div class="product-info">
+                    <h3>${p.name}</h3>
+                    <p>${p.subtitle || "Premium Pakistani Suit"}</p>
+                    <div class="product-price">₹${p.price}</div>
+                    <div class="product-actions">
+                        <button onclick="addToCart('${p.id}')">Add to Cart</button>
+                        <button class="secondary" onclick="addToWishlist('${p.id}')">♡</button>
+                    </div>
+                </div>
+            `;
+
+            grid.appendChild(card);
+        });
+      
+
+
+
+    </script>
+
+</body>
+</html>

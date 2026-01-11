@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TMC – Hijabs</title>
+
+    <meta name="description" content="Shop premium hijabs and scarves at TMC – The Modest Company.">
+    <meta name="keywords" content="Hijabs, modest wear, scarves, TMC">
+
+    <link rel="stylesheet" href="hijab.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="menu-toggle" id="menuToggle">
+  ☰
+</div>
+
+ <ul class="nav-menu" id="navMenu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li class="nav-dropdown">
+                        <a href="shop.html" class="nav-link">Shop</a>
+                        <ul class="dropdown-menu">
+                            <li><a href="category-hijab.html">Hijabs</a></li>
+                            <li><a href="category-abayas.html">Abayas</a></li>
+                            <li><a href="category-pakistani-suits.html">Pakistani Suits</a></li>
+                            <li><a href="shop.html?filter=new">New Arrivals</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="happy-clients.html" class="nav-link">Happy Clients</a></li>
+                    <li><a href="collabs.html" class="nav-link">Collabs</a></li>
+                    <li><a href="pop-up-events.html" class="nav-link">Pop-ups</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+
+<!-- SEARCH MODAL -->
+<!-- SEARCH BOX -->
+<div class="category-search">
+  <input 
+    type="text" 
+    id="searchInput"
+    placeholder="Search hijabs, styles, fabrics…"
+    onkeyup="searchHijabs()"
+  >
+</div>
+
+<main>
+
+    <!-- HERO -->
+    <section class="category-hero">
+        <h1 style="align-items: center;" >Hijabs</h1>
+        <p >Elegant hijabs crafted with premium fabrics for everyday and occasion wear.</p>
+    </section>
+
+    <!-- PRODUCTS GRID -->
+    <section class="category-products">
+        <div class="products-grid" id="hijabsGrid">
+            <!-- Products loaded via JS -->
+        </div>
+    </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <!-- Paste footer from index.html -->
+</footer>
+
+<!-- WHATSAPP FLOAT -->
+<a href="https://wa.me/918939075553" class="whatsapp-float" target="_blank">
+    <!-- SVG -->
+</a>
+
+<!-- JS FILES -->
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+    const grid = document.getElementById("hijabsGrid");
+
+    const products = (window.products || []).filter(
+        p => p.category === "hijabs"
+    );
+
+    if (products.length === 0) {
+        grid.innerHTML = "<p>No hijabs available.</p>";
+    }
+
+    products.forEach(p => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+
+        card.innerHTML = `
+            <img src="${p.image}" alt="${p.name}">
+            <div class="product-info">
+                <h3>${p.name}</h3>
+                <p>${p.subtitle || "Premium Hijab"}</p>
+                <div class="product-price">₹${p.price}</div>
+                <div class="product-actions">
+                    <button onclick="addToCart('${p.id}')">Add to Cart</button>
+                    <button class="secondary" onclick="addToWishlist('${p.id}')">♡</button>
+                </div>
+            </div>
+        `;
+
+        grid.appendChild(card);
+    });
+    
+function searchHijabs() {
+  const input = document.getElementById("searchInput").value.toLowerCase();
+  const cards = document.querySelectorAll(".product-card");
+
+  cards.forEach(card => {
+    const title = card.querySelector("h3").innerText.toLowerCase();
+    const subtitle = card.querySelector("p").innerText.toLowerCase();
+
+    if (title.includes(input) || subtitle.includes(input)) {
+      card.style.display = "block";
+    } else {
+      card.style.display = "none";
+    }
+  });
+}
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+const dropdown = document.querySelector(".nav-dropdown");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+});
+
+// Mobile dropdown click
+dropdown.addEventListener("click", e => {
+  if (window.innerWidth <= 768) {
+    e.preventDefault();
+    dropdown.classList.toggle("open");
+  }
+});
+
+
+</script>
+
+</body>
+</html>

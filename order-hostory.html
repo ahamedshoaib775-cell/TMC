@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>My Orders – TMC</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="stylesheet" href="css/styles.css">
+
+<style>
+.orders{max-width:1000px;margin:80px auto;padding:20px}
+.order-card{
+  background:#fff;
+  padding:25px;
+  border-radius:14px;
+  margin-bottom:20px;
+  box-shadow:0 10px 30px rgba(0,0,0,.08)
+}
+.order-head{display:flex;justify-content:space-between;margin-bottom:15px}
+.order-items div{display:flex;justify-content:space-between;margin-bottom:8px}
+.status{color:green;font-weight:600}
+.empty{text-align:center;color:#666}
+</style>
+</head>
+
+<body>
+
+<header class="header"></header>
+
+<main class="orders">
+  <h2>My Orders</h2>
+  <div id="orders"></div>
+</main>
+
+<footer class="footer"></footer>
+
+<script>
+const orders = JSON.parse(localStorage.getItem("tmcOrders")) || [];
+const box = document.getElementById("orders");
+
+if(!orders.length){
+  box.innerHTML = `<p class="empty">No orders yet</p>`;
+}
+
+orders.reverse().forEach(o=>{
+  let items = "";
+  o.items.forEach(i=>{
+    items += `<div><span>${i.name}</span><span>₹${i.price}</span></div>`;
+  });
+
+  box.innerHTML += `
+    <div class="order-card">
+      <div class="order-head">
+        <strong>Order #${o.id}</strong>
+        <span class="status">Confirmed</span>
+      </div>
+      <div class="order-items">${items}</div>
+      <hr>
+      <strong>Total: ₹${o.total}</strong>
+    </div>
+  `;
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TMC – My Account</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* Account Page */
+        .account-wrapper {
+            padding: 60px 0;
+            max-width: 1000px;
+            margin: auto;
+        }
+
+        .account-card {
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+            padding: 40px;
+        }
+
+        .account-title {
+            font-family: "Playfair Display", serif;
+            font-size: 36px;
+            margin-bottom: 10px;
+        }
+
+        .account-subtitle {
+            color: #777;
+            margin-bottom: 30px;
+        }
+
+        .account-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .account-box {
+            border: 1px solid #eee;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .account-box h3 {
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .account-box input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            font-size: 14px;
+        }
+
+        .account-box button {
+            width: 100%;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #533cff;
+            color: #fff;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .account-box button:hover {
+            background: #3e2ecb;
+        }
+
+        .dashboard {
+            display: none;
+        }
+
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+            gap: 20px;
+        }
+
+        .dashboard-card {
+            padding: 25px;
+            border-radius: 14px;
+            background: #f9f9ff;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .dashboard-card:hover {
+            background: #533cff;
+            color: #fff;
+        }
+
+        .dashboard-card span {
+            display: block;
+            font-size: 14px;
+            margin-top: 5px;
+        }
+
+        .logout-btn {
+            margin-top: 30px;
+            background: #ff5c5c;
+        }
+
+        @media(max-width:768px) {
+            .account-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="header">
+        <!-- Paste header from index.html -->
+    </header>
+
+    <main>
+        <section class="account-wrapper">
+            <div class="account-card">
+
+                <h1 class="account-title">My Account</h1>
+                <p class="account-subtitle">Login or create an account to manage your orders.</p>
+
+                <!-- LOGIN / REGISTER -->
+                <div class="account-grid" id="authSection">
+                    <div class="account-box">
+                        <h3>Login</h3>
+                        <input type="email" id="loginEmail" placeholder="Email">
+                        <input type="password" id="loginPassword" placeholder="Password">
+                        <button onclick="login()">Login</button>
+                    </div>
+
+                    <div class="account-box">
+                        <h3>Create Account</h3>
+                        <input type="text" id="registerName" placeholder="Full Name">
+                        <input type="email" id="registerEmail" placeholder="Email">
+                        <input type="password" id="registerPassword" placeholder="Password">
+                        <button onclick="register()">Register</button>
+                    </div>
+                </div>
+
+                <!-- DASHBOARD -->
+                <div class="dashboard" id="dashboard">
+                    <h2>Welcome, <span id="userName"></span> 👋</h2>
+
+                    <div class="dashboard-grid">
+                        <div class="dashboard-card" onclick="location.href='cart.html'">
+                            🛒
+                            <span>My Cart</span>
+                        </div>
+                        <div class="dashboard-card" onclick="location.href='wishlist.html'">
+                            ❤️
+                            <span>Wishlist</span>
+                        </div>
+                        <div class="dashboard-card">
+                            📦
+                            <span>My Orders</span>
+                        </div>
+                        <div class="dashboard-card">
+                            📍
+                            <span>Address Book</span>
+                        </div>
+                    </div>
+
+                    <button class="account-box logout-btn" onclick="logout()">Logout</button>
+                </div>
+
+            </div>
+        </section>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <!-- Paste footer from index.html -->
+    </footer>
+
+    <!-- WhatsApp Floating -->
+    <a href="https://wa.me/918939075553" class="whatsapp-float" target="_blank">
+        <!-- SVG -->
+    </a>
+
+    <script>
+        const authSection = document.getElementById("authSection");
+        const dashboard = document.getElementById("dashboard");
+        const userNameEl = document.getElementById("userName");
+
+        const user = JSON.parse(localStorage.getItem("tmcUser"));
+
+        if (user) {
+            showDashboard(user.name);
+        }
+
+        function register() {
+            const name = registerName.value;
+            const email = registerEmail.value;
+            const password = registerPassword.value;
+
+            if (!name || !email || !password) return alert("Fill all fields");
+
+            localStorage.setItem("tmcUser", JSON.stringify({ name, email }));
+            showDashboard(name);
+        }
+
+        function login() {
+            const email = loginEmail.value;
+            const user = JSON.parse(localStorage.getItem("tmcUser"));
+
+            if (!user || user.email !== email) {
+                alert("User not found");
+                return;
+            }
+            showDashboard(user.name);
+        }
+
+        function showDashboard(name) {
+            authSection.style.display = "none";
+            dashboard.style.display = "block";
+            userNameEl.textContent = name;
+        }
+
+        function logout() {
+            localStorage.removeItem("tmcUser");
+            location.reload();
+        }
+    </script>
+
+</body>
+</html>

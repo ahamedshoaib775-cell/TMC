@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>TMC – Abayas</title>
+
+    <meta name="description" content="Shop premium abayas at TMC – The Modest Company.">
+    <meta name="keywords" content="Abayas, modest wear, TMC">
+
+    <link rel="stylesheet" href="abayas.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<!-- HEADER -->
+<div class="menu-toggle" id="menuToggle">☰</div>
+
+<ul class="nav-menu" id="navMenu">
+    <li><a href="index.html" class="nav-link">Home</a></li>
+    <li class="nav-dropdown">
+        <a href="shop.html" class="nav-link active">Shop</a>
+        <ul class="dropdown-menu">
+            <li><a href="category-hijab.html">Hijabs</a></li>
+            <li><a href="category-abayas.html">Abayas</a></li>
+            <li><a href="category-pakistani-suits.html">Pakistani Suits</a></li>
+            <li><a href="shop.html?filter=new">New Arrivals</a></li>
+        </ul>
+    </li>
+    <li><a href="about.html" class="nav-link">About</a></li>
+    <li><a href="contact.html" class="nav-link">Contact</a></li>
+</ul>
+
+<!-- SEARCH -->
+<div class="category-search">
+    <input
+        type="text"
+        id="searchInput"
+        placeholder="Search abayas, styles, fabrics…"
+        onkeyup="searchAbayas()"
+    >
+</div>
+
+<main>
+
+    <!-- HERO -->
+    <section class="category-hero">
+        <h1>Abayas</h1>
+        <p>Graceful abayas designed for elegance, comfort, and modesty.</p>
+    </section>
+
+    <!-- PRODUCTS GRID -->
+    <section class="category-products">
+        <div class="products-grid" id="abayasGrid"></div>
+    </section>
+
+</main>
+
+<footer class="footer"></footer>
+
+<a href="https://wa.me/918939075553" class="whatsapp-float" target="_blank"></a>
+
+<!-- JS FILES -->
+<script src="js/products.js"></script>
+<script src="js/cart.js"></script>
+<script src="js/components.js"></script>
+<script src="js/main.js"></script>
+
+<script>
+const grid = document.getElementById("abayasGrid");
+
+const products = (window.products || []).filter(
+    p => p.category === "abayas"
+);
+
+if (products.length === 0) {
+    grid.innerHTML = "<p>No abayas available.</p>";
+}
+
+products.forEach(p => {
+    const card = document.createElement("div");
+    card.className = "product-card";
+
+    card.innerHTML = `
+        <img src="${p.image}" alt="${p.name}">
+        <div class="product-info">
+            <h3>${p.name}</h3>
+            <p>${p.subtitle || "Premium Abaya"}</p>
+            <div class="product-price">₹${p.price}</div>
+            <div class="product-actions">
+                <button onclick="addToCart('${p.id}')">Add to Cart</button>
+                <button class="secondary" onclick="addToWishlist('${p.id}')">♡</button>
+            </div>
+        </div>
+    `;
+
+    grid.appendChild(card);
+});
+
+function searchAbayas() {
+    const input = document.getElementById("searchInput").value.toLowerCase();
+    const cards = document.querySelectorAll(".product-card");
+
+    cards.forEach(card => {
+        const title = card.querySelector("h3").innerText.toLowerCase();
+        const subtitle = card.querySelector("p").innerText.toLowerCase();
+
+        card.style.display =
+            title.includes(input) || subtitle.includes(input)
+            ? "block"
+            : "none";
+    });
+}
+
+const menuToggle = document.getElementById("menuToggle");
+const navMenu = document.getElementById("navMenu");
+const dropdown = document.querySelector(".nav-dropdown");
+
+menuToggle.addEventListener("click", () => {
+  navMenu.classList.toggle("show");
+});
+
+// Mobile dropdown click
+dropdown.addEventListener("click", e => {
+  if (window.innerWidth <= 768) {
+    e.preventDefault();
+    dropdown.classList.toggle("open");
+  }
+});
+
+</script>
+
+</body>
+</html>

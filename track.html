@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>TMC – Track Order</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link rel="stylesheet" href="css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      background: #f7f7fb;
+    }
+
+    .track-container {
+      max-width: 700px;
+      margin: 80px auto;
+      background: #fff;
+      padding: 50px;
+      border-radius: 18px;
+      box-shadow: 0 20px 45px rgba(0,0,0,0.08);
+    }
+
+    .track-title {
+      font-family: "Playfair Display", serif;
+      font-size: 36px;
+      text-align: center;
+      margin-bottom: 10px;
+    }
+
+    .track-subtitle {
+      text-align: center;
+      color: #777;
+      margin-bottom: 40px;
+      font-size: 15px;
+    }
+
+    .track-form input {
+      width: 100%;
+      padding: 14px;
+      margin-bottom: 18px;
+      border-radius: 10px;
+      border: 1px solid #ddd;
+      font-size: 14px;
+    }
+
+    .track-form button {
+      width: 100%;
+      padding: 14px;
+      background: #533cff;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
+    .track-form button:hover {
+      background: #3e2ecb;
+    }
+
+    .order-status {
+      display: none;
+      margin-top: 40px;
+    }
+
+    .status-card {
+      background: #f9f9ff;
+      border-radius: 14px;
+      padding: 25px;
+      margin-bottom: 15px;
+    }
+
+    .status-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 14px;
+      margin-bottom: 8px;
+    }
+
+    .timeline {
+      margin-top: 30px;
+    }
+
+    .step {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+      opacity: 0.4;
+    }
+
+    .step.active {
+      opacity: 1;
+    }
+
+    .step-circle {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: #ccc;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      margin-right: 15px;
+    }
+
+    .step.active .step-circle {
+      background: #533cff;
+    }
+
+    .step-text {
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .track-container {
+        padding: 35px 25px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header class="header">
+    <!-- paste your header -->
+  </header>
+
+  <main>
+    <div class="track-container">
+      <h1 class="track-title">Track Your Order</h1>
+      <p class="track-subtitle">
+        Enter your Order ID and phone number to check your order status.
+      </p>
+
+      <!-- FORM -->
+      <div class="track-form">
+        <input type="text" id="orderId" placeholder="Order ID (eg: TMC1023)">
+        <input type="tel" id="phone" placeholder="Phone Number">
+        <button onclick="trackOrder()">Track Order</button>
+      </div>
+
+      <!-- STATUS -->
+      <div class="order-status" id="orderStatus">
+        <div class="status-card">
+          <div class="status-row">
+            <strong>Order ID</strong>
+            <span id="oId"></span>
+          </div>
+          <div class="status-row">
+            <strong>Status</strong>
+            <span id="oStatus"></span>
+          </div>
+          <div class="status-row">
+            <strong>Expected Delivery</strong>
+            <span id="oDate"></span>
+          </div>
+        </div>
+
+        <!-- TIMELINE -->
+        <div class="timeline">
+          <div class="step active">
+            <div class="step-circle">1</div>
+            <div class="step-text">Order Placed</div>
+          </div>
+          <div class="step" id="step2">
+            <div class="step-circle">2</div>
+            <div class="step-text">Packed</div>
+          </div>
+          <div class="step" id="step3">
+            <div class="step-circle">3</div>
+            <div class="step-text">Shipped</div>
+          </div>
+          <div class="step" id="step4">
+            <div class="step-circle">4</div>
+            <div class="step-text">Delivered</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="tmc-footer">
+    <!-- your footer -->
+  </footer>
+
+  <script>
+    function trackOrder() {
+      const orderId = document.getElementById("orderId").value.trim();
+      const phone = document.getElementById("phone").value.trim();
+
+      if (!orderId || !phone) {
+        alert("Please enter Order ID and Phone Number");
+        return;
+      }
+
+      // Fake demo status (later connect backend)
+      const statuses = ["Packed", "Shipped", "Delivered"];
+      const randomStatus = statuses[Math.floor(Math.random() * statuses.length)];
+
+      document.getElementById("orderStatus").style.display = "block";
+      document.getElementById("oId").textContent = orderId;
+      document.getElementById("oStatus").textContent = randomStatus;
+      document.getElementById("oDate").textContent = "Within 3–5 working days";
+
+      document.getElementById("step2").classList.remove("active");
+      document.getElementById("step3").classList.remove("active");
+      document.getElementById("step4").classList.remove("active");
+
+      if (randomStatus === "Packed") {
+        document.getElementById("step2").classList.add("active");
+      }
+      if (randomStatus === "Shipped") {
+        document.getElementById("step2").classList.add("active");
+        document.getElementById("step3").classList.add("active");
+      }
+      if (randomStatus === "Delivered") {
+        document.getElementById("step2").classList.add("active");
+        document.getElementById("step3").classList.add("active");
+        document.getElementById("step4").classList.add("active");
+      }
+    }
+  </script>
+
+</body>
+</html>
