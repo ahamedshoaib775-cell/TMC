@@ -875,4 +875,44 @@ p {
     display: flex;
   }
 }
+.whatsapp-book {
+  position: fixed;
+  bottom: 22px;
+  right: 22px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: #25d366;
+  color: #fff;
+  padding: 12px 18px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 500;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.3);
+  z-index: 9999;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.whatsapp-book:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.4);
+}
+
+.wa-icon {
+  font-size: 18px;
+}
+
+/* Mobile tweak */
+@media (max-width: 480px) {
+  .wa-text {
+    display: none;
+  }
+
+  .whatsapp-book {
+    padding: 14px;
+    border-radius: 50%;
+  }
+}
+
 
