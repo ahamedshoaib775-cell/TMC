@@ -50,14 +50,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-document.getElementById("waBtn").addEventListener("click", () => {
-  const phone = "916369601308";
-  const message = "Hi, I'm interested in your product";
-  window.open(
-    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
-    "_blank"
-  );
-});
+
 
 
 
@@ -72,6 +65,7 @@ document.getElementById("waBtn").addEventListener("click", () => {
     "_blank"
   );
 });
+
 
 
 
