@@ -50,16 +50,9 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-
-
-
-
-function toggleMenu() {
-  document.getElementById("mobileMenu").classList.toggle("show");
-}
 document.getElementById("waBtn").addEventListener("click", () => {
-  const phone = "91639601308";
-  const message = "Hi, I want to book a session";
+  const phone = "916369601308";
+  const message = "Hi, I'm interested in your product";
   window.open(
     `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
     "_blank"
@@ -68,5 +61,15 @@ document.getElementById("waBtn").addEventListener("click", () => {
 
 
 
+function toggleMenu() {
+  document.getElementById("mobileMenu").classList.toggle("show");
+}
 
-
+document.getElementById("waBtn").addEventListener("click", () => {
+  const phone = "919876543210";
+  const message = "Hi, I want to book a session";
+  window.open(
+    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+});
