@@ -1,0 +1,114 @@
+/* ===============================
+   MOBILE SHOP EXPERIENCE
+================================ */
+@media (max-width: 768px) {
+
+  body {
+    background: #fff;
+  }
+
+  /* HERO COMPACT */
+  .category-hero {
+    padding: 18px 14px;
+    text-align: left;
+  }
+
+  .category-hero h1 {
+    font-size: 22px;
+    margin-bottom: 4px;
+  }
+
+  .category-hero p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* FILTER BAR (LIKE IMAGE 1) */
+  .mobile-filters {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 10px 14px;
+    border-bottom: 1px solid #eee;
+  }
+
+  .mobile-filters button {
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 20px;
+    border: 1px solid #ddd;
+    background: #fff;
+    white-space: nowrap;
+  }
+
+  .mobile-filters button.active {
+    backgroundbackground: #111;
+    color: #fff;
+    border-color: #111;
+  }
+
+  /* PRODUCTS GRID */
+  .category-products {
+    padding: 10px;
+  }
+
+  .products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  /* PRODUCT CARD */
+  .product-card {
+    border-radius: 10px;
+    border: none;
+    box-shadow: none;
+  }
+
+  .product-card img {
+    height: 220px;
+    border-radius: 10px;
+  }
+
+  /* WISHLIST ICON */
+  .product-card::after {
+    content: "♡";
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    background: #fff;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-size: 16px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+  }
+
+  /* PRODUCT INFO */
+  .product-info {
+    padding: 8px 4px;
+    text-align: left;
+  }
+
+  .product-info h3 {
+    font-size: 13px;
+    font-weight: 500;
+    margin-bottom: 2px;
+  }
+
+  .product-info p {
+    font-size: 11px;
+    margin-bottom: 6px;
+  }
+
+  .product-price {
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  /* HIDE BUTTONS (LIKE SHOP APPS) */
+  .product-actions {
+    display: none;
+  }
+}
