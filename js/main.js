@@ -64,4 +64,15 @@ document.getElementById("waBtn").addEventListener("click", () => {
 function toggleMenu() {
   document.getElementById("mobileMenu").classList.toggle("show");
 }
+document.getElementById("waBtn").addEventListener("click", () => {
+  const phone = "91639601308";
+  const message = "Hi, I want to book a session";
+  window.open(
+    `https://wa.me/${phone}?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+});
+
+
+
 
