@@ -1,149 +1,118 @@
 <!DOCTYPE html>
 <html lang="en">
-    <link rel="stylesheet" href="style.css">
-    
-<button class="whatsapp-book" id="waBtn">
-  💬 chat with us 
-</button>
-
-
-
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="TMC – The Modest Company | Premium imported hijabs, abayas & Pakistani suits. Luxury modest wear for the modern woman.">
-    <meta name="keywords" content="modest wear, hijab, abaya, Pakistani suits, luxury fashion, imported hijab">
-    
-    <!-- Open Graph -->
-    <meta property="og:title" content="TMC – The Modest Company | Luxury Modest Wear">
-    <meta property="og:description" content="Discover OG imported hijabs, abayas & Pakistani suits crafted for the modern modest woman.">
-    <meta property="og:image" content="https://themodestcompany.com/og-image.jpg">
-    <meta property="og:url" content="https://themodestcompany.com">
-    <meta property="og:type" content="website">
-    
-    <title>TMC – The Modest Company | Luxury Modest Wear</title>
-    
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <link rel="stylesheet" href="css/styles.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="TMC – The Modest Company | Premium imported hijabs, abayas & Pakistani suits. Luxury modest wear for the modern woman." />
+  <meta name="keywords" content="modest wear, hijab, abaya, Pakistani suits, luxury fashion, imported hijab" />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="TMC – The Modest Company | Luxury Modest Wear" />
+  <meta property="og:description" content="Discover OG imported hijabs, abayas & Pakistani suits crafted for the modern modest woman." />
+  <meta property="og:image" content="https://themodestcompany.com/og-image.jpg" />
+  <meta property="og:url" content="https://themodestcompany.com" />
+  <meta property="og:type" content="website" />
+
+  <title>TMC – The Modest Company | Luxury Modest Wear</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- CSS (keep ALL CSS links inside head) -->
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
+
 <body>
-    <!-- Announcement Bar -->
-    <div class="announcement-bar">
-        <p></p>
-    </div>
-<header class="header">
-  <div class="nav-container">
-    <div class="logo">TMC</div>
+  <!-- WhatsApp button must be inside body -->
+  <button class="whatsapp-book" id="waBtn">chat with us</button>
 
-    <!-- HAMBURGER -->
-    <div class="hamburger" onclick="toggleMenu()">
-      ☰
-    </div>
-
-    <!-- NAV MENU -->
-    <nav class="nav-menu" id="mobileMenu">
-      <a href="index.html">Home</a>
-      <a href="shop.html">Shop</a>
-      <a href="about.html">About</a>
-      <a href="contact.html">Contact</a>
-    </nav>
+  <!-- Announcement Bar -->
+  <div class="announcement-bar">
+    <p></p>
   </div>
-</header>
 
+  <!-- Use ONE header/navbar only (remove duplicates) -->
+  <header class="header" id="header">
+    <div class="container">
+      <nav class="nav">
+        <a href="index.html" class="logo" aria-label="The Modest Company logo">
+          <div class="logo" id="logo">
+            <div class="logo-circle">
+              <img src="logo.jpeg" alt="The Modest Company Logo" />
+            </div>
+          </div>
+        </a>
 
-<ul class="nav-menu" id="navMenu">
-  ...
-  
-</ul>
+        <ul class="nav-menu" id="navMenu">
+          <li><a href="index.html" class="nav-link active">Home</a></li>
+          <li class="nav-dropdown">
+            <a href="shop.html" class="nav-link">Shop</a>
+            <ul class="dropdown-menu">
+              <li><a href="category-hijab.html">Hijabs</a></li>
+              <li><a href="category-abayas.html">Abayas</a></li>
+              <li><a href="category-pakistani-suits.html">Pakistani Suits</a></li>
+              <li><a href="shop.html?filter=new">New Arrivals</a></li>
+            </ul>
+          </li>
+          <li><a href="about.html" class="nav-link">About</a></li>
+          <li><a href="happy-clients.html" class="nav-link">Happy Clients</a></li>
+          <li><a href="collabs.html" class="nav-link">Collabs</a></li>
+          <li><a href="pop-up-events.html" class="nav-link">Pop-ups</a></li>
+          <li><a href="contact.html" class="nav-link">Contact</a></li>
+        </ul>
 
+        <div class="nav-actions">
+          <button class="nav-icon" aria-label="Search" id="searchBtn">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.3-4.3"></path>
+            </svg>
+          </button>
 
+          <a href="wishlist.html" class="nav-icon" aria-label="Wishlist">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+            </svg>
+            <span class="badge" id="wishlistCount">0</span>
+          </a>
 
+          <a href="cart.html" class="nav-icon" aria-label="Cart">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+              <line x1="3" y1="6" x2="21" y2="6"></line>
+              <path d="M16 10a4 4 0 0 1-8 0"></path>
+            </svg>
+            <span class="badge" id="cartCount">0</span>
+          </a>
 
-    <!-- Navigation -->
-    <header class="header" id="header">
-        <div class="container">
-            <nav class="nav">
-                
-  
-
-                
-                <a href="index.html" class="logo">
-                   <div class="logo" id="logo" aria-label="The Modest Company logo">
-      <div class="logo-circle">
-        <img src="logo.jpeg" alt="The Modest Company Logo">
-      </div>
-      
-    </div>
-                </a>
-                
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="index.html" class="nav-link active">Home</a></li>
-                    <li class="nav-dropdown">
-                        <a href="shop.html" class="nav-link">Shop</a>
-                        <ul class="dropdown-menu">
-                            <li><a href="category-hijab.html">Hijabs</a></li>
-                            <li><a href="category-abayas.html">Abayas</a></li>
-                            <li><a href="category-pakistani-suits.html">Pakistani Suits</a></li>
-                            <li><a href="shop.html?filter=new">New Arrivals</a></li>
-                        </ul>
-                    </li>
-                    <li><a href="about.html" class="nav-link">About</a></li>
-                    <li><a href="happy-clients.html" class="nav-link">Happy Clients</a></li>
-                    <li><a href="collabs.html" class="nav-link">Collabs</a></li>
-                    <li><a href="pop-up-events.html" class="nav-link">Pop-ups</a></li>
-                    <li><a href="contact.html" class="nav-link">Contact</a></li>
-                </ul>
-                
-                <div class="nav-actions">
-                    <button class="nav-icon" aria-label="Search" id="searchBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="11" cy="11" r="8"></circle>
-                            <path d="m21 21-4.3-4.3"></path>
-                        </svg>
-                    </button>
-                    <a href="wishlist.html" class="nav-icon" aria-label="Wishlist">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                        </svg>
-                        <span class="badge" id="wishlistCount">0</span>
-                    </a>
-                    <a href="cart.html" class="nav-icon" aria-label="Cart">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
-                            <line x1="3" y1="6" x2="21" y2="6"></line>
-                            <path d="M16 10a4 4 0 0 1-8 0"></path>
-                        </svg>
-                        <span class="badge" id="cartCount">0</span>
-                    </a>
-                    <a href="account.html" class="nav-icon" aria-label="Account">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="12" cy="7" r="4"></circle>
-                        </svg>
-                    </a>
-                </div>
-            </nav>
+          <!-- IMPORTANT: only ONE account link, with id="accountLink" -->
+          <a href="login.html" class="nav-icon" aria-label="Account" id="accountLink">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </svg>
+          </a>
         </div>
-    </header>
-
-    <!-- Search Modal -->
-    <div class="search-modal" id="searchModal">
-        <div class="search-modal-content">
-            <button class="close-search" id="closeSearch" aria-label="Close search">×</button>
-            <form class="search-form" action="shop.html" method="GET">
-                <input type="search" name="q" placeholder="Search hijabs, abayas, suits..." class="search-input" id="searchInput">
-                <button type="submit" class="search-submit">Search</button>
-            </form>
-        </div>
+      </nav>
     </div>
+  </header>
 
-    <main>
-        <!-- Hero Section -->
+  <!-- Search Modal -->
+  <div class="search-modal" id="searchModal">
+    <div class="search-modal-content">
+      <button class="close-search" id="closeSearch" aria-label="Close search">×</button>
+      <form class="search-form" action="shop.html" method="GET">
+        <input type="search" name="q" placeholder="Search hijabs, abayas, suits..." class="search-input" id="searchInput" />
+        <button type="submit" class="search-submit">Search</button>
+      </form>
+    </div>
+  </div>
+
+  <!-- =========================
+      <!-- Hero Section -->
         <section class="hero">
             <div class="hero-bg">
                 <div class="hero-overlay"></div>
@@ -451,12 +420,7 @@
       <a href="collabs.html">Collaborations</a>
       <a href="pop-up-events.html">Pop-up Events</a>
       <a href="contact.html">Contact</a>
-    </div>
-
-    <div>
-      <h4>Help</h4>
-      <a href="shipping-policy.html">Shipping Policy</a>
-      <a href="returns-policy.html">Returns & Exchange</a>
+    </div>f="returns-policy.html">Returns & Exchange</a>
       <a href="privacy-policy.html">Privacy Policy</a>
       <a href="terms.html">Terms & Conditions</a>
       <a href="track.html">Track Order</a>
@@ -471,18 +435,41 @@
   </div>
 
   <div class="footer-bottom">
-    © 2026 TMC – The Modest Company. All rights reserved.  
+    ©️ 2026 TMC – The Modest Company. All rights reserved.  
     <br>
     Founded by @fictionally_flawless_farwah
   </div>
 </footer>
+       ========================= -->
 
 
-  
+  <!-- Your existing JS files -->
+  <script src="js/products.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/components.js"></script>
+  <script src="js/main.js"></script>
 
-    <script src="js/products.js"></script>
-    <script src="js/cart.js"></script>
-    <script src="js/components.js"></script>
-    <script src="js/main.js"></script>
+  <!-- Supabase auth navbar handler -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script>
+    // Use publishable/anon key (safe for browser) [web:47]
+    const SUPABASE_URL = "https://zptvwegpiackjssnellc.supabase.co";
+    const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdHZ3ZWdwaWFja2pzc25lbGxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMjEzMDYsImV4cCI6MjA4Mzc5NzMwNn0.V8F2lmDKljgx-EkII2hmiUDg9kuyEgB3-L6lPJatTp0";
+
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY); // [web:47]
+
+    async function updateAccountLink() {
+      const { data: { user } } = await supabase.auth.getUser(); // [web:43]
+      const accountLink = document.getElementById("accountLink");
+      if (!accountLink) return;
+
+      accountLink.href = user ? "account.html" : "login.html";
+      accountLink.title = user ? "My Account" : "Login";
+    }
+
+    // Run on load + when auth state changes [web:38]
+    updateAccountLink();
+    supabase.auth.onAuthStateChange(() => updateAccountLink()); // [web:38]
+  </script>
 </body>
 </html>
