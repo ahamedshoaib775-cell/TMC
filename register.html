@@ -261,6 +261,24 @@
         }
 
         console.log('SignUp successful, user ID:', data.user.id);
+                    
+            // Insert user profile with username
+            const { error: profileError } = await supabase
+              .from('profiles')
+              .insert([
+                {
+                  id: data.user.id,
+                  username: username,
+                  email: email
+                }
+              ]);
+            
+            if (profileError) {
+              console.error('Profile creation error:', profileError);
+              throw new Error('Profile creation failed: ' + profileError.message);
+            }
+            
+            console.log('Profile created successfully for user:', data.user.id);
         
         messageDiv.className = 'message success';
         messageDiv.textContent = '✅ Account created successfully! Check your email to verify. Redirecting to login...';
