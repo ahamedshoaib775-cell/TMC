@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - TMC</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background: #0a0a0a;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            color: #fff;
+        }
+        .navbar {
+            background: rgba(10, 10, 10, 0.95);
+            border-bottom: 1px solid #d4af37;
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar-logo {
+            color: #d4af37;
+            font-size: 20px;
+            font-weight: 600;
+            text-decoration: none;
+        }
+        .navbar-links a {
+            color: #d4af37;
+            text-decoration: none;
+            margin-left: 30px;
+            font-size: 14px;
+        }
+        .container {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 40px;
+            background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
+            border: 1px solid #d4af37;
+            border-radius: 12px;
+            box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
+        }
+        .container h1 {
+            color: #d4af37;
+            margin-bottom: 30px;
+            font-size: 36px;
+            border-bottom: 2px solid #d4af37;
+            padding-bottom: 15px;
+        }
+        .user-info {
+            background: rgba(42, 42, 42, 0.5);
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+            border-left: 4px solid #d4af37;
+        }
+        .user-info p {
+            margin: 12px 0;
+            font-size: 16px;
+        }
+        .user-info strong {
+            color: #d4af37;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .section h2 {
+            color: #d4af37;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+        .section-content {
+            background: rgba(42, 42, 42, 0.3);
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #444;
+        }
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%);
+            color: #000;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.3s;
+            margin-right: 10px;
+            margin-top: 10px;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+        .btn-logout {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+            color: #fff;
+        }
+        .btn-logout:hover {
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="index.html" class="navbar-logo">TMC</a>
+        <div class="navbar-links">
+            <a href="shop.html">Shop</a>
+            <a href="account.html">Account</a>
+            <a onclick="logout()" style="cursor: pointer;">Logout</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>👤 My Account</h1>
+
+        <div class="user-info">
+            <p><strong>Email:</strong> <span id="user-email">Loading...</span></p>
+            <p><strong>Username:</strong> <span id="user-username">Loading...</span></p>
+            <p><strong>Member Since:</strong> <span id="join-date">Loading...</span></p>
+        </div>
+
+        <div class="section">
+            <h2>📦 My Orders</h2>
+            <div class="section-content">
+                <div id="orders-container">
+                    <p style="color: #aaa;">Loading orders...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>❤️ My Wishlist</h2>
+            <div class="section-content">
+                <div id="wishlist-container">
+                    <p style="color: #aaa;">Loading wishlist...</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2>⚙️ Account Actions</h2>
+            <div class="nav-links">
+                <a href="shop.html" class="btn">Continue Shopping</a>
+                <button class="btn btn-logout" onclick="logout()">Logout</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        // ===== CONFIGURE THESE TWO VALUES =====
+        const SUPABASE_URL = 'YOUR_PROJECT_URL_HERE';  // Replace with your Supabase URL
+        const SUPABASE_KEY = 'YOUR_ANON_KEY_HERE';      // Replace with your anon key
+        // =====================================
+
+        const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+        async function loadUserData() {
+            try {
+                // Check if user is logged in
+                const { data: { user } } = await supabase.auth.getUser();
+
+                if (!user) {
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                // Load user profile
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('*')
+                    .eq('id', user.id)
+                    .single();
+
+                document.getElementById('user-email').textContent = user.email;
+                document.getElementById('user-username').textContent = profile?.username || 'N/A';
+                document.getElementById('join-date').textContent = new Date(user.created_at).toLocaleDateString();
+
+                // Load orders
+                const { data: orders } = await supabase
+                    .from('orders')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .order('created_at', { ascending: false });
+
+                const ordersContainer = document.getElementById('orders-container');
+                if (orders && orders.length > 0) {
+                    ordersContainer.innerHTML = orders.map(order => `
+                        <div style="padding: 10px; border-bottom: 1px solid #444; margin-bottom: 10px;">
+                            <p><strong>Order #${order.order_number}</strong> - ₹${order.total_price}</p>
+                            <p style="color: #d4af37; font-size: 12px;">Status: ${order.status.toUpperCase()}</p>
+                            <p style="color: #888; font-size: 12px;">${new Date(order.created_at).toLocaleDateString()}</p>
+                        </div>
+                    `).join('');
+                } else {
+                    ordersContainer.innerHTML = '<p style="color: #aaa;">No orders yet. <a href="shop.html" style="color: #d4af37;">Start shopping!</a></p>';
+                }
+
+                // Load wishlist
+                const { data: wishlist } = await supabase
+                    .from('wishlist')
+                    .select('*')
+                    .eq('user_id', user.id)
+                    .order('created_at', { ascending: false });
+
+                const wishlistContainer = document.getElementById('wishlist-container');
+                if (wishlist && wishlist.length > 0) {
+                    wishlistContainer.innerHTML = wishlist.map(item => `
+                        <div style="padding: 10px; border-bottom: 1px solid #444; margin-bottom: 10px; display: flex; justify-content: space-between;">
+                            <div>
+                                <p><strong>${item.product_name}</strong></p>
+                                <p style="color: #d4af37;">₹${item.product_price}</p>
+                            </div>
+                            <button onclick="removeFromWishlist('${item.id}')" style="background: #ff6b6b; color: #fff; border: none; padding: 8px 12px; border-radius: 4px; cursor: pointer;">Remove</button>
+                        </div>
+                    `).join('');
+                } else {
+                    wishlistContainer.innerHTML = '<p style="color: #aaa;">Your wishlist is empty. <a href="shop.html" style="color: #d4af37;">Browse products!</a></p>';
+                }
+
+            } catch (error) {
+                console.error('Error loading user data:', error);
+                alert('Error loading your account. Please try again.');
+            }
+        }
+
+        async function removeFromWishlist(id) {
+            try {
+                await supabase.from('wishlist').delete().eq('id', id);
+                loadUserData(); // Reload
+            } catch (error) {
+                alert('Error removing from wishlist');
+            }
+        }
+
+        async function logout() {
+            await supabase.auth.signOut();
+            localStorage.clear();
+            window.location.href = 'index.html';
+        }
+
+        loadUserData();
+    </script>
+</body>
+</html>
