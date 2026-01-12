@@ -277,16 +277,8 @@
 
                 if (signUpError) throw new Error(signUpError.message);
 
-                // Create profile in profiles table
-                const { error: profileError } = await supabase.from('profiles').insert([
-                    {
-                        id: data.user.id,
-                        username: username,
-                        email: email
-                    }
                 ]);
 
-                if (profileError) throw new Error(profileError.message);
 
                 messageDiv.className = 'message success';
                 messageDiv.textContent = '✅ Account created! Verify your email and login.';
