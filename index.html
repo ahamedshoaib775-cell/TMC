@@ -91,7 +91,25 @@
           </a>
 
           <!-- This link will be updated by Supabase auth script -->
-          <a href="login.html" class="nav-icon" aria-label="Account" id="accountLink">
+<!-- User Profile Dropdown -->
+                <div class="user-profile" id="userProfile">
+                  <button class="nav-icon user-icon" id="userBtn" aria-label="User Profile" type="button">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                      <circle cx="12" cy="7" r="4"></circle>
+                    </svg>
+                  </button>
+                  <!-- Dropdown Menu -->
+                  <div class="user-dropdown" id="userDropdown">
+                    <div class="dropdown-header" id="dropdownHeader">
+                      <!-- User info will be populated here -->
+                    </div>
+                    <div class="dropdown-divider"></div>
+                    <div class="dropdown-content" id="dropdownContent">
+                      <!-- Menu items will be populated here -->
+                    </div>
+                  </div>
+                </div>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
               <circle cx="12" cy="7" r="4"></circle>
@@ -465,18 +483,229 @@
 
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
 
-    async function updateAccountLink() {
-      const { data: { user } } = await supabase.auth.getUser();
-      const accountLink = document.getElementById("accountLink");
-      if (!accountLink) return;
-
-      accountLink.href = user ? "account.html" : "login.html";
-      accountLink.title = user ? "My Account" : "Login";
-    }
-
+async function updateUserProfile() {
+          const { data: { user } } = await supabase.auth.getUser();
+          const userBtn = document.getElementById('userBtn');
+          const userDropdown = document.getElementById('userDropdown');
+          const dropdownHeader = document.getElementById('dropdownHeader');
+          const dropdownContent = document.getElementById('dropdownContent');
+          
+          if (!userBtn || !userDropdown || !dropdownHeader || !dropdownContent) return;
+          
+          if (user) {
+            // User is logged in
+            dropdownHeader.innerHTML = `
+              <div class="user-info">
+                <div class="user-avatar">${user.email.charAt(0).toUpperCase()}</div>
+                <div class="user-details">
+                  <p class="user-email">${user.email}</p>
+                  <p class="user-status">Logged In</p>
+                </div>
+              </div>
+            `;
+            
+            dropdownContent.innerHTML = `
+              <a href="account.html" class="dropdown-item">
+                <span>My Account</span>
+              </a>
+              <a href="wishlist.html" class="dropdown-item">
+                <span>My Wishlist</span>
+              </a>
+              <a href="orders.html" class="dropdown-item">
+                <span>My Orders</span>
+              </a>
+              <button id="logoutBtn" class="dropdown-item logout-item" type="button">
+                <span>Logout</span>
+              </button>
+            `;
+            
+            // Add logout functionality
+            const logoutBtn = document.getElementById('logoutBtn');
+            if (logoutBtn) {
+              logoutBtn.addEventListener('click', async () => {
+                await supabase.auth.signOut();
+                window.location.href = 'login.html';
+              });
+            }
+          } else {
+            // User is not logged in
+            dropdownHeader.innerHTML = `
+              <p class="not-logged-in">Welcome to TMC</p>
+            `;
+            
+            dropdownContent.innerHTML = `
+              <a href="login.html" class="dropdown-item">
+                <span>Login</span>
+              </a>
+              <a href="register.html" class="dropdown-item">
+                <span>Create Account</span>
+              </a>
+            `;
+          }
+        }
+        
+        // Toggle dropdown visibility
+        function toggleUserDropdown(event) {
+          event.preventDefault();
+          const userDropdown = document.getElementById('userDropdown');
+          if (userDropdown) {
+            userDropdown.classList.toggle('active');
+          }
+        }
+        
+        // Close dropdown when clicking outside
+        function closeUserDropdown(event) {
+          const userProfile = document.getElementById('userProfile');
+          if (userProfile && !userProfile.contains(event.target)) {
+            const userDropdown = document.getElementById('userDropdown');
+            if (userDropdown) {
+              userDropdown.classList.remove('active');
+            }
+          }
+        }
+        
+        // Add event listeners
+        document.addEventListener('DOMContentLoaded', () => {
+          const userBtn = document.getElementById('userBtn');
+          if (userBtn) {
+            userBtn.addEventListener('click', toggleUserDropdown);
+          }
+        });
+        
+        document.addEventListener('click', closeUserDropdown);
+        
+        // Initial load and listen for auth changes
+        updateUserProfile();
+        supabase.auth.onAuthStateChange(() => updateUserProfile())
+    
+      </script>
+      
+      <style>
+        /* User Profile Dropdown Styles */
+        .user-profile {
+          position: relative;
+        }
+        
+        .user-dropdown {
+          display: none;
+          position: absolute;
+          top: 100%;
+          right: 0;
+          background: #1a1a1a;
+          border: 1px solid #d4af37;
+          border-radius: 8px;
+          min-width: 280px;
+          z-index: 1000;
+          box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+          margin-top: 10px;
+        }
+        
+        .user-dropdown.active {
+          display: block;
+        }
+        
+        .dropdown-header {
+          padding: 16px;
+          border-bottom: 1px solid #333;
+        }
+        
+        .user-info {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+        }
+        
+        .user-avatar {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: #d4af37;
+          color: #0a0a0a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-weight: bold;
+          font-size: 16px;
+        }
+        
+        .user-details {
+          flex: 1;
+        }
+        
+        .user-email {
+          margin: 0;
+          font-size: 14px;
+          color: #d4af37;
+          font-weight: 600;
+          word-break: break-word;
+        }
+        
+        .user-status {
+          margin: 4px 0 0 0;
+          font-size: 12px;
+          color: #888;
+        }
+        
+        .not-logged-in {
+          margin: 0;
+          color: #d4af37;
+          font-size: 14px;
+          font-weight: 500;
+        }
+        
+        .dropdown-divider {
+          height: 1px;
+          background: #333;
+        }
+        
+        .dropdown-content {
+          padding: 8px 0;
+        }
+        
+        .dropdown-item {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          padding: 12px 16px;
+          color: #ffffff;
+          text-decoration: none;
+          font-size: 14px;
+          border: none;
+          background: none;
+          cursor: pointer;
+          transition: all 0.3s ease;
+          width: 100%;
+          text-align: left;
+        }
+        
+        .dropdown-item:hover {
+          background: #2a2a2a;
+          color: #d4af37;
+        }
+        
+        .dropdown-item.logout-item {
+          color: #ff6b6b;
+          border-top: 1px solid #333;
+          margin-top: 8px;
+        }
+        
+        .dropdown-item.logout-item:hover {
+          background: #2a1a1a;
+          color: #ff8787;
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+          .user-dropdown {
+            min-width: 250px;
+            right: -20px;
+          }
+        }
+      </style>
     updateAccountLink();
     supabase.auth.onAuthStateChange(() => updateAccountLink());
   </script>
 </body>
 </html>
+
 
