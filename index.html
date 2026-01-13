@@ -569,8 +569,13 @@ async function updateUserProfile() {
         document.addEventListener('click', closeUserDropdown);
         
         // Initial load and listen for auth changes
-        updateUserProfile();
-        supabase.auth.onAuthStateChange(() => updateUserProfile())
+// Wait for Supabase to be initialized
+ window.addEventListener('load', () => {
+   if (window.supabase) {
+     updateUserProfile();
+     supabase.auth.onAuthStateChange(() => updateUserProfile());
+   }
+   </script>
     
       </script>
       
@@ -698,6 +703,7 @@ async function updateUserProfile() {
       </style>
 
 </html>
+
 
 
 
