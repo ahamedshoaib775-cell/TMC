@@ -699,9 +699,127 @@ async function updateUserProfile() {
             right: -20px;
           }
         }
+        
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const SUPABASE_URL = "https://zptvwegpiackjssnellc.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdHZ3ZWdwaWFja2pzc25lbGxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMjEzMDYsImV4cCI6MjA4Mzc5NzMwNn0.V8F2lmDKljgx-EkII2hmiUDg9kuyEgB3-L6lPJatTp0";
+
+let supabaseClient = null;
+
+// Initialize Supabase
+function initSupabase() {
+  if (window.supabase) {
+    supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    updateUserProfile();
+    supabaseClient.auth.onAuthStateChange(() => updateUserProfile());
+  }
+}
+
+// Update user profile display
+async function updateUserProfile() {
+  if (!supabaseClient) return;
+  
+  const { data: { user } } = await supabaseClient.auth.getUser();
+  const dropdownHeader = document.getElementById('dropdownHeader');
+  const dropdownContent = document.getElementById('dropdownContent');
+  
+  if (!dropdownHeader || !dropdownContent) return;
+  
+  if (user) {
+    dropdownHeader.innerHTML = `
+      <div class="user-info">
+        <div class="user-avatar">${user.email.charAt(0).toUpperCase()}</div>
+        <div class="user-details">
+          <p class="user-email">${user.email}</p>
+          <p class="user-status">Logged In</p>
+        </div>
+      </div>
+    `;
+    dropdownContent.innerHTML = `
+      <a href="account.html" class="dropdown-item">
+        <span>My Account</span>
+      </a>
+      <a href="wishlist.html" class="dropdown-item">
+        <span>My Wishlist</span>
+      </a>
+      <a href="orders.html" class="dropdown-item">
+        <span>My Orders</span>
+      </a>
+      <button id="logoutBtn" class="dropdown-item logout-item" type="button">
+        <span>Logout</span>
+      </button>
+    `;
+    
+    const logoutBtn = document.getElementById('logoutBtn');
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', async () => {
+        if (supabaseClient) {
+          await supabaseClient.auth.signOut();
+          window.location.href = 'login.html';
+        }
+      });
+    }
+  } else {
+    dropdownHeader.innerHTML = `<p class="not-logged-in">Welcome to TMC</p>`;
+    dropdownContent.innerHTML = `
+      <a href="login.html" class="dropdown-item">
+        <span>Login</span>
+      </a>
+      <a href="register.html" class="dropdown-item">
+        <span>Create Account</span>
+      </a>
+    `;
+  }
+}
+
+// Toggle dropdown
+function toggleUserDropdown(e) {
+  e.preventDefault();
+  const dropdown = document.getElementById('userDropdown');
+  if (dropdown) {
+    dropdown.classList.toggle('active');
+  }
+}
+
+// Close dropdown when clicking outside
+function closeDropdownOnClickOutside(e) {
+  const userProfile = document.getElementById('userProfile');
+  if (userProfile && !userProfile.contains(e.target)) {
+    const dropdown = document.getElementById('userDropdown');
+    if (dropdown) {
+      dropdown.classList.remove('active');
+    }
+  }
+}
+
+// Initialize on DOM ready
+function init() {
+  const userBtn = document.getElementById('userBtn');
+  if (userBtn) {
+    userBtn.addEventListener('click', toggleUserDropdown);
+  }
+  
+  document.addEventListener('click', closeDropdownOnClickOutside);
+  
+  // Initialize Supabase after a small delay to ensure it's loaded
+  if (window.supabase) {
+    initSupabase();
+  } else {
+    setTimeout(initSupabase, 1000);
+  }
+}
+
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
+</script>
       </style>
 
 </html>
+
 
 
 
