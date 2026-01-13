@@ -563,6 +563,7 @@ async function updateUserProfile() {
           const userBtn = document.getElementById('userBtn');
           if (userBtn) {
             userBtn.addEventListener('click', toggleUserDropdown);
+                console.log('User button found, adding click listener');
           }
         });
         
@@ -775,6 +776,10 @@ async function updateUserProfile() {
 
 // Toggle dropdown
 function toggleUserDropdown(e) {
+    console.log('toggleUserDropdown called');
+    console.log('Current dropdown:', dropdown);
+    console.log('Dropdown classList:', dropdown?.classList);
+  
   e.preventDefault();
   const dropdown = document.getElementById('userDropdown');
   if (dropdown) {
@@ -821,6 +826,7 @@ if (document.readyState === 'loading') {
       </style>
 
 </html>
+
 
 
 
