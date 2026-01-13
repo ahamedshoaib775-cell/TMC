@@ -823,9 +823,59 @@ if (document.readyState === 'loading') {
 </script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script src="auth.js"></script>
-      </style>
+      
+    
+    <!-- WORKING USER DROPDOWN FUNCTIONALITY -->
+<script>
+// Simple, reliable dropdown toggle
+let dropdownOpen = false;
+
+const userBtn = document.getElementById('userBtn');
+const userDropdown = document.getElementById('userDropdown');
+
+if (userBtn && userDropdown) {
+  console.log('✅ User dropdown elements found');
+  
+  // Toggle dropdown on click
+  userBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    console.log('User button clicked, dropdownOpen:', dropdownOpen);
+    dropdownOpen = !dropdownOpen;
+    
+    if (dropdownOpen) {
+      userDropdown.style.display = 'block';
+      console.log('Dropdown opened');
+    } else {
+      userDropdown.style.display = 'none';
+      console.log('Dropdown closed');
+    }
+  });
+  
+  // Close dropdown when clicking outside
+  document.addEventListener('click', () => {
+    if (dropdownOpen) {
+      userDropdown.style.display = 'none';
+      dropdownOpen = false;
+      console.log('Dropdown closed (clicked outside)');
+    }
+  });
+  
+  // Prevent close when clicking inside dropdown
+  userDropdown.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+  
+  console.log('✅ User dropdown event listeners attached');
+} else {
+  console.error('❌ User dropdown elements NOT found');
+  console.log('userBtn:', userBtn);
+  console.log('userDropdown:', userDropdown);
+}
+</script>
+    </style>
 
 </html>
+
 
 
 
