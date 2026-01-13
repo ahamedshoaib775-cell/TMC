@@ -102,11 +102,15 @@
                   <!-- Dropdown Menu -->
                   <div class="user-dropdown" id="userDropdown">
                     <div class="dropdown-header" id="dropdownHeader">
+                            <div class="dropdown-item user-email">Not logged in</div>
                       <!-- User info will be populated here -->
                     </div>
                     <div class="dropdown-divider"></div>
                     <div class="dropdown-content" id="dropdownContent">
                       <!-- Menu items will be populated here -->
+                            <a href="/TMC/login.html" class="dropdown-item">Login</a>
+                            <a href="/TMC/register.html" class="dropdown-item">Register</a>
+                            <button id="logoutBtn" class="dropdown-item" style="width: 100%; text-align: left; border: none; background: none; cursor: pointer;">Logout</button>
                     </div>
                   </div>
                 </div>
@@ -871,6 +875,7 @@ window.addEventListener('load', async () => {
 </style>
 
 </html>
+
 
 
 
