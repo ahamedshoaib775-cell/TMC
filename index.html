@@ -847,7 +847,29 @@ if (userBtn && userDropdown) {
     e.stopPropagation();
   });
 }
-</script>
+
+    
+    // Populate dropdown with user info on page load
+window.addEventListener('load', async () => {
+  const user = JSON.parse(localStorage.getItem('auth_user') || '{}');
+  const token = localStorage.getItem('auth_token');
+  
+  if (token && user.email) {
+    const dropdownHeader = document.getElementById('dropdownHeader');
+    const dropdownContent = document.getElementById('dropdownContent');
+    
+    if (dropdownHeader) {
+      dropdownHeader.innerHTML = `<div style="padding: 12px; text-align: center;"><strong>${user.email}</strong><br><small style="color: #888;">Logged In</small></div>`;
+    }
+    
+    if (dropdownContent) {
+      dropdownContent.innerHTML = `<a href="#" class="dropdown-item" style="display: block; padding: 12px; color: #d4af37; text-decoration: none; border-top: 1px solid #333;" onclick="alert('Account page coming soon');">My Account</a><a href="#" class="dropdown-item" style="display: block; padding: 12px; color: #ff6b6b; text-decoration: none; cursor: pointer;" onclick="document.getElementById('userBtn').click(); localStorage.clear(); window.location.href='login.html';">Logout</a>`;
+    }
+  }
+});
+  
+  </script>
 </style>
 
 </html>
+
