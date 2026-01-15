@@ -14,14 +14,14 @@
     .form-group label { display: block; color: #d4af37; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
     .form-group input { width: 100%; padding: 12px; background: rgba(42, 42, 42, 0.6); border: 1px solid #d4af37; color: #fff; border-radius: 5px; font-size: 16px; outline: none; }
     .form-group input:focus { background: rgba(42, 42, 42, 0.8); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
-    .btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; margin-top: 10px; }
+    .btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; margin-top: 10px; transition: all 0.3s; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
     .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-    .message { padding: 12px; border-radius: 6px; margin-bottom: 15px; text-align: center; display: none; }
+    .message { padding: 12px; border-radius: 6px; margin-bottom: 15px; text-align: center; display: none; font-size: 14px; }
     .message.error { background: rgba(255, 107, 107, 0.1); color: #ff6b6b; border: 1px solid #ff6b6b; }
     .message.success { background: rgba(76, 175, 80, 0.1); color: #4caf50; border: 1px solid #4caf50; }
     .auth-link { text-align: center; margin-top: 20px; color: #aaa; }
-    .auth-link a { color: #d4af37; text-decoration: none; }
+    .auth-link a { color: #d4af37; text-decoration: none; cursor: pointer; }
   </style>
 </head>
 <body>
@@ -106,21 +106,24 @@
         }
 
         if (data && data.user) {
+          // Store user data in localStorage for account page
           localStorage.setItem('user_email', email);
           localStorage.setItem('username', username);
           localStorage.setItem('user_id', data.user.id);
+          localStorage.setItem('auth_user', JSON.stringify(data.user));
           
           messageDiv.textContent = 'Registration successful! Redirecting to login...';
           messageDiv.className = 'message success';
           messageDiv.style.display = 'block';
           registerBtn.textContent = 'Create Account';
 
+          // Redirect to login page after 2 seconds
           setTimeout(() => {
             window.location.href = 'login.html';
-          }, 1500);
+          }, 2000);
         }
       } catch (error) {
-        messageDiv.textContent = 'Unexpected error occurred';
+        messageDiv.textContent = 'Unexpected error occurred: ' + error.message;
         messageDiv.className = 'message error';
         messageDiv.style.display = 'block';
         registerBtn.disabled = false;
