@@ -5,255 +5,108 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login - TMC</title>
   <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
-    body {
-      background: #0a0a0a url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100"><rect fill="%230a0a0a" width="100" height="100"/><path fill="%23111" d="M0 0h100v100H0z" opacity=".05"/></svg>');
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      color: #fff;
-    }
-    .navbar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      background: rgba(10, 10, 10, 0.95);
-      border-bottom: 1px solid #d4af37;
-      padding: 15px 30px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      z-index: 100;
-    }
-    .navbar-logo {
-      color: #d4af37;
-      font-size: 20px;
-      font-weight: 600;
-      text-decoration: none;
-    }
-    .navbar-links a {
-      color: #d4af37;
-      text-decoration: none;
-      margin-left: 30px;
-      font-size: 14px;
-      transition: color 0.3s;
-    }
-    .navbar-links a:hover {
-      color: #e5c158;
-    }
-    .auth-container {
-      background: linear-gradient(135deg, rgba(26, 26, 26, 0.95) 0%, rgba(20, 20, 20, 0.95) 100%);
-      padding: 50px;
-      border-radius: 12px;
-      width: 100%;
-      max-width: 420px;
-      border: 1px solid #d4af37;
-      box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1);
-      margin-top: 80px;
-    }
-    .auth-container h2 {
-      color: #d4af37;
-      text-align: center;
-      margin-bottom: 30px;
-      font-size: 32px;
-      font-weight: 600;
-    }
-    .form-group {
-      margin-bottom: 20px;
-    }
-    .form-group label {
-      display: block;
-      color: #d4af37;
-      font-weight: 500;
-      margin-bottom: 10px;
-      font-size: 14px;
-    }
-    .form-group input {
-      width: 100%;
-      padding: 14px;
-      background: rgba(42, 42, 42, 0.8);
-      border: 1px solid #444;
-      border-radius: 6px;
-      color: #fff;
-      font-size: 14px;
-      transition: all 0.3s;
-    }
-    .form-group input:focus {
-      outline: none;
-      border-color: #d4af37;
-      box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
-      background: rgba(42, 42, 42, 1);
-    }
-    .btn-submit {
-      width: 100%;
-      padding: 14px;
-      background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%);
-      color: #000;
-      border: none;
-      border-radius: 6px;
-      font-weight: 600;
-      cursor: pointer;
-      font-size: 16px;
-      transition: all 0.3s;
-      margin-top: 10px;
-    }
-    .btn-submit:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
-    }
-    .btn-submit:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-    }
-    .message {
-      margin-top: 15px;
-      padding: 12px;
-      border-radius: 6px;
-      text-align: center;
-      font-size: 14px;
-      min-height: 20px;
-      display: none;
-    }
-    .message.error {
-      background: rgba(255, 107, 107, 0.2);
-      color: #ff6b6b;
-      border: 1px solid #ff6b6b;
-      display: block;
-    }
-    .message.success {
-      background: rgba(81, 207, 102, 0.2);
-      color: #51cf66;
-      border: 1px solid #51cf66;
-      display: block;
-    }
-    .message.info {
-      background: rgba(100, 150, 200, 0.2);
-      color: #64a0d8;
-      border: 1px solid #64a0d8;
-      display: block;
-    }
-    .switch-auth {
-      text-align: center;
-      margin-top: 25px;
-      color: #888;
-      font-size: 14px;
-    }
-    .switch-auth a {
-      color: #d4af37;
-      cursor: pointer;
-      text-decoration: none;
-      font-weight: 600;
-    }
-    .switch-auth a:hover {
-      text-decoration: underline;
-    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+    .login-container { width: 100%; max-width: 450px; padding: 40px; background: rgba(20, 20, 20, 0.95); border: 2px solid #d4af37; border-radius: 12px; box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2); }
+    .login-container h1 { color: #d4af37; margin-bottom: 10px; font-size: 28px; text-align: center; }
+    .login-container p { text-align: center; color: #aaa; margin-bottom: 30px; font-size: 14px; }
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; color: #d4af37; font-weight: 600; margin-bottom: 8px; }
+    .form-group input { width: 100%; padding: 12px; background: rgba(42, 42, 42, 0.6); border: 1px solid #d4af37; color: #fff; border-radius: 6px; font-size: 14px; }
+    .form-group input:focus { outline: none; background: rgba(42, 42, 42, 0.8); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
+    .btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; transition: all 0.3s; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
+    .message { padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center; font-size: 14px; }
+    .message.error { background: rgba(255, 107, 107, 0.1); color: #ff6b6b; border: 1px solid #ff6b6b; }
+    .message.success { background: rgba(76, 175, 80, 0.1); color: #4caf50; border: 1px solid #4caf50; }
+    .auth-link { text-align: center; margin-top: 20px; }
+    .auth-link a { color: #d4af37; text-decoration: none; cursor: pointer; }
+    .auth-link a:hover { text-decoration: underline; }
+    .loading { display: none; }
   </style>
 </head>
 <body>
-  <div class="navbar">
-    <a href="index.html" class="navbar-logo">TMC</a>
-    <div class="navbar-links">
-      <a href="index.html">Home</a>
-      <a href="register.html">Register</a>
-    </div>
-  </div>
-
-  <div class="auth-container">
-    <h2>Login</h2>
-    <form id="login-form">
+  <div class="login-container">
+    <h1>🔐 Login</h1>
+    <p>Access your TMC account</p>
+    
+    <div id="messageDiv" class="message" style="display: none;"></div>
+    
+    <form id="loginForm" onsubmit="handleLogin(event)">
       <div class="form-group">
         <label for="email">Email</label>
-        <input type="email" id="email" name="email" placeholder="your@email.com" required />
+        <input type="email" id="email" name="email" required placeholder="your@email.com">
       </div>
+      
       <div class="form-group">
         <label for="password">Password</label>
-        <input type="password" id="password" name="password" placeholder="Enter your password" required />
+        <input type="password" id="password" name="password" required placeholder="Enter password">
       </div>
-      <div class="message" id="message"></div>
-      <button type="submit" class="btn-submit" id="submit-btn">Login</button>
+      
+      <button type="submit" class="btn">Login</button>
     </form>
-    <div class="switch-auth">
-      Don't have an account? <a href="register.html">Create one here</a>
+    
+    <div class="auth-link">
+      <p>Don't have an account? <a href="register.html">Register here</a></p>
+    </div>
+    <div class="auth-link">
+      <p><a href="index.html">Back to home</a></p>
     </div>
   </div>
-
+  
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="auth-config.js"></script>
   <script>
-    const SUPABASE_URL = 'https://zptvwegpiackjssnellc.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdHZ3ZWdwaWFja2pzc25lbGxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMjEzMDYsImV4cCI6MjA4Mzc5NzMwNn0.V8F2lmDKljgx-EkII2hmiUDg9kuyEgB3-L6lPJatTp0';
-    
-    const form = document.getElementById('login-form');
-    const messageDiv = document.getElementById('message');
-    const submitBtn = document.getElementById('submit-btn');
-    
-    form.addEventListener('submit', async (e) => {
+    async function handleLogin(e) {
       e.preventDefault();
-      
-      const email = document.getElementById('email').value.trim();
+      const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
-      
-      // Clear previous message
-      messageDiv.textContent = '';
-      messageDiv.className = 'message';
-      
-      submitBtn.disabled = true;
+      const messageDiv = document.getElementById('messageDiv');
       
       try {
-        messageDiv.className = 'message info';
-        messageDiv.textContent = '⏳ Logging you in...';
-        console.log('Starting login...');
+        messageDiv.style.display = 'none';
         
-        // Call Supabase Auth API to login
-        const response = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-            'apikey': SUPABASE_KEY,
-          },
-          body: JSON.stringify({
-            email: email,
-            password: password
-          })
+        if (!supabase) {
+          console.error('Supabase not initialized');
+          messageDiv.textContent = 'System error. Please refresh and try again.';
+          messageDiv.className = 'message error';
+          messageDiv.style.display = 'block';
+          return;
+        }
+        
+        const { data, error } = await supabase.auth.signInWithPassword({
+          email: email,
+          password: password
         });
         
-        const data = await response.json();
-        console.log('Login response:', response.status, data);
-        
-        if (!response.ok) {
-          throw new Error(data.error_description || data.message || 'Login failed');
+        if (error) {
+          messageDiv.textContent = 'Login failed: ' + (error.message || 'Unknown error');
+          messageDiv.className = 'message error';
+          messageDiv.style.display = 'block';
+          console.error('Login error:', error);
+          return;
         }
         
-        console.log('Login successful');
-        
-        // Store session token
-        if (data.access_token) {
-          localStorage.setItem('auth_token', data.access_token);
-          localStorage.setItem('user_id', data.user?.id);
+        if (data && data.user) {
+          messageDiv.textContent = 'Login successful! Redirecting...';
+          messageDiv.className = 'message success';
+          messageDiv.style.display = 'block';
+          
+          // Store session info
+          localStorage.setItem('auth_token', data.session?.access_token || '');
+          localStorage.setItem('user_id', data.user.id);
+          
+          setTimeout(() => {
+            window.location.href = 'account.html';
+          }, 1000);
         }
-        
-        // Success!
-        messageDiv.className = 'message success';
-        messageDiv.textContent = '✅ Login successful! Redirecting...';
-        
-        form.reset();
-        
-        setTimeout(() => {
-          window.location.href = 'index.html';
-        }, 2000);
-        
       } catch (error) {
-        console.error('Login error:', error);
+        messageDiv.textContent = 'Error: ' + error.message;
         messageDiv.className = 'message error';
-        messageDiv.textContent = `❌ Error: ${error.message}`;
-        submitBtn.disabled = false;
+        messageDiv.style.display = 'block';
+        console.error('Login error:', error);
       }
-    });
+    }
   </script>
 </body>
 </html>
