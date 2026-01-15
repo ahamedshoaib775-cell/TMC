@@ -6,106 +6,57 @@
   <title>Register - TMC</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #fff; display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 20px; }
-    .register-container { width: 100%; max-width: 450px; padding: 40px; background: rgba(20, 20, 20, 0.95); border: 2px solid #d4af37; border-radius: 12px; box-shadow: 0 8px 32px rgba(212, 175, 55, 0.2); }
+    body { background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%); font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: #fff; }
+    .register-container { width: 100%; max-width: 450px; margin: 50px auto; padding: 40px; background: linear-gradient(135deg, rgba(20, 20, 20, 0.95) 0%, rgba(26, 26, 26, 0.95) 100%); border: 2px solid #d4af37; border-radius: 12px; box-shadow: 0 8px 32px rgba(212, 175, 55, 0.1); }
     .register-container h1 { color: #d4af37; margin-bottom: 10px; font-size: 28px; text-align: center; }
     .register-container p { text-align: center; color: #aaa; margin-bottom: 30px; font-size: 14px; }
     .form-group { margin-bottom: 20px; }
     .form-group label { display: block; color: #d4af37; font-weight: 600; margin-bottom: 8px; font-size: 14px; }
-    .form-group input { width: 100%; padding: 12px; background: rgba(42, 42, 42, 0.6); border: 1px solid #d4af37; color: #fff; border-radius: 6px; font-size: 14px; }
-    .form-group input:focus { outline: none; background: rgba(42, 42, 42, 0.8); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
-    .btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; transition: all 0.3s; }
-    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
-    .btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
-    .message { padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center; font-size: 14px; }
+    .form-group input { width: 100%; padding: 12px; background: rgba(42, 42, 42, 0.6); border: 1px solid #d4af37; color: #fff; border-radius: 5px; font-size: 16px; outline: none; }
+    .form-group input:focus { background: rgba(42, 42, 42, 0.8); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
+    .btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; margin-top: 10px; }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
+    .message { padding: 12px; border-radius: 6px; margin-bottom: 15px; text-align: center; display: none; }
     .message.error { background: rgba(255, 107, 107, 0.1); color: #ff6b6b; border: 1px solid #ff6b6b; }
     .message.success { background: rgba(76, 175, 80, 0.1); color: #4caf50; border: 1px solid #4caf50; }
-    .auth-link { text-align: center; margin-top: 20px; }
-    .auth-link a { color: #d4af37; text-decoration: none; cursor: pointer; }
-    .auth-link a:hover { text-decoration: underline; }
-    .password-strength { font-size: 12px; margin-top: 5px; color: #aaa; }
-    .strength-bar { height: 4px; background: #333; border-radius: 2px; margin-top: 5px; overflow: hidden; }
-    .strength-fill { height: 100%; background: #d4af37; transition: width 0.3s; }
+    .auth-link { text-align: center; margin-top: 20px; color: #aaa; }
+    .auth-link a { color: #d4af37; text-decoration: none; }
   </style>
 </head>
 <body>
   <div class="register-container">
-    <h1>🃄 Register</h1>
+    <h1>Register</h1>
     <p>Create your TMC account</p>
-    
-    <div id="messageDiv" class="message" style="display: none;"></div>
-    
+    <div id="messageDiv" class="message"></div>
     <form id="registerForm" onsubmit="handleRegister(event)">
       <div class="form-group">
-        <label for="username">Username</label>
-        <input type="text" id="username" name="username" required placeholder="Choose a username" minlength="3">
+        <label>Username</label>
+        <input type="text" id="username" placeholder="Choose a username" required>
       </div>
-      
       <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" id="email" name="email" required placeholder="your@email.com">
+        <label>Email</label>
+        <input type="email" id="email" placeholder="your@email.com" required>
       </div>
-      
       <div class="form-group">
-        <label for="password">Password</label>
-        <input type="password" id="password" name="password" required placeholder="At least 6 characters" minlength="6" onchange="checkPasswordStrength()" oninput="checkPasswordStrength()">
-        <div class="strength-bar">
-          <div class="strength-fill" id="strengthBar" style="width: 0%;"></div>
-        </div>
-        <div class="password-strength" id="strengthText"></div>
+        <label>Password</label>
+        <input type="password" id="password" placeholder="At least 6 characters" required>
       </div>
-      
       <div class="form-group">
-        <label for="confirmPassword">Confirm Password</label>
-        <input type="password" id="confirmPassword" name="confirmPassword" required placeholder="Confirm password" minlength="6">
+        <label>Confirm Password</label>
+        <input type="password" id="confirmPassword" placeholder="Confirm password" required>
       </div>
-      
       <button type="submit" class="btn" id="registerBtn">Create Account</button>
     </form>
-    
-    <div class="auth-link">
-      <p>Already have an account? <a href="login.html">Login here</a></p>
-    </div>
-    <div class="auth-link">
-      <p><a href="index.html">Back to home</a></p>
-    </div>
+    <div class="auth-link">Already have an account? <a href="login.html">Login here</a></div>
   </div>
-  
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // Supabase configuration
     const SUPABASE_URL = 'https://zptvwegpiackjssnellc.supabase.co';
     const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdHZ3ZWdwaWFja2pzc25lbGxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMjEzMDYsImV4cCI6MjA4Mzc5NzMwNn0.V8F2lmDKljgx-EkII2hmiUDg9kuyEgB3-L6lPJatTp0';
-    
-    // Initialize Supabase
     const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-    console.log('Supabase initialized successfully');
-    
-    function checkPasswordStrength() {
-      const password = document.getElementById('password').value;
-      const strengthBar = document.getElementById('strengthBar');
-      const strengthText = document.getElementById('strengthText');
-      
-      let strength = 0;
-      if (password.length >= 6) strength += 25;
-      if (password.length >= 8) strength += 25;
-      if (/[A-Z]/.test(password)) strength += 25;
-      if (/[0-9!@#$%^&*]/.test(password)) strength += 25;
-      
-      strengthBar.style.width = strength + '%';
-      
-      if (strength < 50) {
-        strengthText.textContent = 'Weak password';
-        strengthText.style.color = '#ff6b6b';
-      } else if (strength < 75) {
-        strengthText.textContent = 'Fair password';
-        strengthText.style.color = '#ffd700';
-      } else {
-        strengthText.textContent = 'Strong password';
-        strengthText.style.color = '#4caf50';
-      }
-    }
-    
+
     async function handleRegister(e) {
       e.preventDefault();
       const username = document.getElementById('username').value.trim();
@@ -114,73 +65,62 @@
       const confirmPassword = document.getElementById('confirmPassword').value;
       const messageDiv = document.getElementById('messageDiv');
       const registerBtn = document.getElementById('registerBtn');
-      
+
+      if (!username || !email || !password || !confirmPassword) {
+        messageDiv.textContent = 'All fields are required';
+        messageDiv.className = 'message error';
+        messageDiv.style.display = 'block';
+        return;
+      }
+
+      if (password !== confirmPassword) {
+        messageDiv.textContent = 'Passwords do not match';
+        messageDiv.className = 'message error';
+        messageDiv.style.display = 'block';
+        return;
+      }
+
+      if (password.length < 6) {
+        messageDiv.textContent = 'Password must be at least 6 characters';
+        messageDiv.className = 'message error';
+        messageDiv.style.display = 'block';
+        return;
+      }
+
+      registerBtn.disabled = true;
+      registerBtn.textContent = 'Creating Account...';
+
       try {
-        messageDiv.style.display = 'none';
-        registerBtn.disabled = true;
-        registerBtn.textContent = 'Creating Account...';
-        
-        // Validation
-        if (username.length < 3) {
-          throw new Error('Username must be at least 3 characters');
-        }
-        
-        if (password !== confirmPassword) {
-          throw new Error('Passwords do not match');
-        }
-        
-        if (password.length < 6) {
-          throw new Error('Password must be at least 6 characters');
-        }
-        
-        console.log('Attempting registration with email:', email);
-        
-        // Sign up with Supabase
         const { data, error } = await supabase.auth.signUp({
           email: email,
-          password: password,
-          options: {
-            data: {
-              username: username
-            }
-          }
+          password: password
         });
-        
+
         if (error) {
-          console.error('Registration error:', error);
-          throw error;
+          messageDiv.textContent = 'Error: ' + error.message;
+          messageDiv.className = 'message error';
+          messageDiv.style.display = 'block';
+          registerBtn.disabled = false;
+          registerBtn.textContent = 'Create Account';
+          return;
         }
-        
+
         if (data && data.user) {
-          console.log('Registration successful, user:', data.user.id);
-          
-          // Store session
-          if (data.session) {
-            localStorage.setItem('auth_token', data.session.access_token);
-            localStorage.setItem('user_id', data.user.id);
-            localStorage.setItem('user_email', data.user.email);
-            localStorage.setItem('username', username);
-          }
+          localStorage.setItem('user_email', email);
+          localStorage.setItem('username', username);
+          localStorage.setItem('user_id', data.user.id);
           
           messageDiv.textContent = 'Registration successful! Redirecting to login...';
           messageDiv.className = 'message success';
           messageDiv.style.display = 'block';
-          
-          // Redirect to login or account page
+          registerBtn.textContent = 'Create Account';
+
           setTimeout(() => {
-            if (data.session) {
-              // If auto-logged in, go to account
-              window.location.href = 'account.html';
-            } else {
-              // Otherwise go to login
-              window.location.href = 'login.html';
-            }
+            window.location.href = 'login.html';
           }, 1500);
         }
       } catch (error) {
-        console.error('Registration error:', error);
-        const errorMessage = error.message || 'Registration failed';
-        messageDiv.textContent = 'Error: ' + errorMessage;
+        messageDiv.textContent = 'Unexpected error occurred';
         messageDiv.className = 'message error';
         messageDiv.style.display = 'block';
         registerBtn.disabled = false;
