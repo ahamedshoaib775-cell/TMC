@@ -16,13 +16,13 @@
     .form-group input:focus { outline: none; background: rgba(42, 42, 42, 0.8); box-shadow: 0 0 8px rgba(212, 175, 55, 0.3); }
     .btn { width: 100%; padding: 12px; background: linear-gradient(135deg, #d4af37 0%, #e5c158 100%); color: #000; border: none; border-radius: 6px; font-weight: 600; cursor: pointer; font-size: 16px; transition: all 0.3s; }
     .btn:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(212, 175, 55, 0.4); }
+    .btn:disabled { opacity: 0.5; cursor: not-allowed; }
     .message { padding: 12px; border-radius: 6px; margin-bottom: 20px; text-align: center; font-size: 14px; }
     .message.error { background: rgba(255, 107, 107, 0.1); color: #ff6b6b; border: 1px solid #ff6b6b; }
     .message.success { background: rgba(76, 175, 80, 0.1); color: #4caf50; border: 1px solid #4caf50; }
     .auth-link { text-align: center; margin-top: 20px; }
     .auth-link a { color: #d4af37; text-decoration: none; cursor: pointer; }
     .auth-link a:hover { text-decoration: underline; }
-    .loading { display: none; }
   </style>
 </head>
 <body>
@@ -43,7 +43,7 @@
         <input type="password" id="password" name="password" required placeholder="Enter password">
       </div>
       
-      <button type="submit" class="btn">Login</button>
+      <button type="submit" class="btn" id="loginBtn">Login</button>
     </form>
     
     <div class="auth-link">
@@ -55,24 +55,28 @@
   </div>
   
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <script src="auth-config.js"></script>
   <script>
+    // Supabase configuration
+    const SUPABASE_URL = 'https://zptvwegpiackjssnellc.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpwdHZ3ZWdwaWFja2pzc25lbGxjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjgyMjEzMDYsImV4cCI6MjA4Mzc5NzMwNn0.V8F2lmDKljgx-EkII2hmiUDg9kuyEgB3-L6lPJatTp0';
+    
+    // Initialize Supabase
+    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+    console.log('Supabase initialized successfully');
+    
     async function handleLogin(e) {
       e.preventDefault();
       const email = document.getElementById('email').value;
       const password = document.getElementById('password').value;
       const messageDiv = document.getElementById('messageDiv');
+      const loginBtn = document.getElementById('loginBtn');
       
       try {
         messageDiv.style.display = 'none';
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Logging in...';
         
-        if (!supabase) {
-          console.error('Supabase not initialized');
-          messageDiv.textContent = 'System error. Please refresh and try again.';
-          messageDiv.className = 'message error';
-          messageDiv.style.display = 'block';
-          return;
-        }
+        console.log('Attempting login with email:', email);
         
         const { data, error } = await supabase.auth.signInWithPassword({
           email: email,
@@ -80,14 +84,17 @@
         });
         
         if (error) {
+          console.error('Login error:', error);
           messageDiv.textContent = 'Login failed: ' + (error.message || 'Unknown error');
           messageDiv.className = 'message error';
           messageDiv.style.display = 'block';
-          console.error('Login error:', error);
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Login';
           return;
         }
         
         if (data && data.user) {
+          console.log('Login successful for user:', data.user.id);
           messageDiv.textContent = 'Login successful! Redirecting...';
           messageDiv.className = 'message success';
           messageDiv.style.display = 'block';
@@ -101,10 +108,12 @@
           }, 1000);
         }
       } catch (error) {
-        messageDiv.textContent = 'Error: ' + error.message;
+        console.error('Login error:', error);
+        messageDiv.textContent = 'Error: ' + (error.message || 'Unknown error occurred');
         messageDiv.className = 'message error';
         messageDiv.style.display = 'block';
-        console.error('Login error:', error);
+        loginBtn.disabled = false;
+        loginBtn.textContent = 'Login';
       }
     }
   </script>
